@@ -1,0 +1,53 @@
+/*
+// ICONS
+
+// UI icon font: ds.o UI Icons
+// Designed by Development Seed
+*/
+
+<% if (eot.include) { %>
+@font-face {
+  font-family: "<%= font.name %>";
+  src: url('<%= font.path %>/<%= font.name %>.eot');
+  font-weight: normal;
+  font-style: normal;
+}
+<% } %>
+
+<% if (ttf.include || woff.include) { %>
+@font-face {
+  font-family: "<%= font.name %>";
+  <% if (ttf.encode) { %>
+  src: url(data:application/x-font-ttf;charset=utf-8;base64,<%= ttf.encode %>) format('truetype');
+  <% } else if (ttf.include) { %>
+  src: url('<%= font.path %>/<%= font.name %>.ttf');
+  <% } %>
+  <% if (woff.encode) { %>
+  src: url(data:application/font-woff;charset=utf-8;base64,<%= woff.encode %>) format('truetype');
+  <% } else if (woff.include) { %>
+  src: url('<%= font.path %>/<%= font.name %>.woff');
+  <% } %>
+  font-weight: normal;
+  font-style: normal;
+}
+<% } %>
+
+.<%= className %>, [class^="<%= className %>-"], [class*=" <%= className %>-"] {
+  font-family: "<%= font.name %>";
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  vertical-align: bottom;
+
+  // Better Font Rendering
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+<% _.each(font.glyphs, function(glyph) { %>
+.<%= className %>-<%= glyph.name %>:before {
+  content: "\<%= glyph.unicode[0].charCodeAt(0).toString(16).toUpperCase() %>"
+}
+<% }); %>

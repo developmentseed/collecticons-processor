@@ -1,0 +1,168 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>Font preview</title>
+
+
+    <style type="text/css">
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+    }
+
+    #site-canvas {
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .icons-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      text-align: center;
+      word-spacing: -0.26rem;
+    }
+
+    .icons-list li {
+      width: 10rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 1rem;
+      margin: 0.5rem;
+      display: inline-block;
+      word-spacing: normal;
+      vertical-align: top;
+    }
+
+    .ico {
+      display: inline-block;
+      height: 2rem;
+      width: 2rem;
+      line-height: 2rem;
+      font-size: 1rem;
+      text-align: center;
+      background-color: #ddd;
+      border-radius: 4px;
+      color: #444;
+    }
+
+    .label {
+      display: block;
+      margin-top: 1rem;
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+    }
+
+    .icons-list.size-32 .ico {
+      height: 4rem;
+      width: 4rem;
+      line-height: 4rem;
+      font-size: 2rem;
+    }
+
+    .icons-list.size-48 .ico {
+      height: 5rem;
+      width: 5rem;
+      line-height: 5rem;
+      font-size: 3rem;
+    }
+
+    .switcher {
+      margin: 1rem 0;
+      padding: 0;
+      text-align: center;
+      word-spacing: -0.26rem;
+    }
+
+    .switcher li {
+      display: inline-block;
+      word-spacing: normal;
+      vertical-align: top;
+      margin: 0 0.5rem;
+    }
+
+    .switcher li a {
+      text-decoration: none;
+      background-color: #ddd;
+      color: #444;
+      padding: 0.25rem 0.5rem;
+      font-size: 0.875rem;
+      border-radius: 4px;
+    }
+
+    .switcher li a.active {
+      background-color: #FFBB4D;
+      color: #fff;
+    }
+  
+    </style>
+
+
+    <style type="text/css">
+      @font-face {
+        font-family: "<%= font.name %>";
+        src: url(data:application/font-woff;charset=utf-8;base64,<%= font.encodedWoff %>) format('woff');
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      .<%= className %>, [class^="<%= className %>-"], [class*=" <%= className %>-"] {
+        font-family: "<%= font.name %>";
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        vertical-align: bottom;
+
+        // Better Font Rendering
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      <% _.each(font.glyphs, function(glyph) { %>
+      .<%= className %>-<%= glyph.name %>:before {
+        content: "\<%= glyph.unicode[0].charCodeAt(0).toString(16).toUpperCase() %>"
+      }
+      <% }); %>
+    </style>
+  </head>
+  <body>
+    <div id="site-canvas">
+      <ul class="switcher">
+        <li><a href="#" class="active" data-size="16">16</a></li>
+        <li><a href="#" data-size="32">32</a></li>
+        <li><a href="#" data-size="48">48</a></li>
+      </ul>
+
+      <ul id="list" class="icons-list">
+        <% _.each(font.glyphs, function(glyph) { %>
+        <li><i class="ico icon <%= className %>-<%= glyph.name %>"></i><span class="label"><%= glyph.name %></span></li>
+        <% }); %>
+      </ul>
+    </div>
+
+    <script>
+      var elements = document.querySelectorAll('.switcher a');
+      [].forEach.call(elements, function(el) {
+        el.addEventListener('click', function(event) {
+          event.preventDefault();
+          
+          var size = this.getAttribute('data-size');
+          document.getElementById('list').className = 'icons-list size-' + size;
+
+          var elements = document.querySelectorAll('.switcher a');
+          [].forEach.call(elements, function(e) {
+            e.className = '';
+          });
+          this.className = 'active';
+        });
+      });
+    </script>
+  </body>
+</html>
