@@ -9,6 +9,10 @@
   "bin": {
     "collecticons": "bin/collecticons.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/developmentseed/collecticons-processor"
+  },
   "preferGlobal": "true",
   "author": "DevelopmentSeed",
   "license": "MIT",
@@ -22,5 +26,8 @@
     "gulp-iconfont": "^3.0.2",
     "gulp-xml-editor": "^2.2.1",
     "lodash": "^3.10.0"
+  },
+  "devDependencies": {
+    "mocha": "^2.2.5"
   }
 }

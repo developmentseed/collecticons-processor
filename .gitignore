@@ -1,2 +1,5 @@
 .resources
 node_modules
+
+# Test
+tests/results
