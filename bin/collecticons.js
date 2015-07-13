@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 
 var program = require('commander');
-var pjson = require('../package.json');
+var pkg = require('../package.json');
 var collecticons = require('../src/index');
 
 function list(val) {
@@ -12,15 +12,15 @@ function list(val) {
 ///                             SCRIPT SETUP                                 ///
 ////////////////////////////////////////////////////////////////////////////////
 program
-  .version(pjson.version);
+  .version(pkg.version);
 
 program
   .command('compile <source-folder>')
-  .description('Compile the font from scv icons')
+  .description('Compile the font from svg icons')
   .option("--font-name <name>", "name of the font", 'collecticons')
   .option("--font-types <dest>", "font types to output (ttf,woff,eot) [ttf,woff,eot]", list, ['ttf', 'woff', 'eot'])
   .option("--font-dest <dest>", "destination folder for the font", 'collecticons/font/')
-  .option("--font-embed", "embed the font in the css. When embedding, the font files are removed")
+  .option("--font-embed", "embed the font in the css (except eot). When embedding, the font files are removed")
 
   .option("--class-name <name>", "class name to use", 'collecticon')
   .option("--style-format <dest>", "style formats to output (sass,css) [sass]", list, ['sass'])

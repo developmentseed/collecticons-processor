@@ -7,6 +7,7 @@
 }); %>
 {
   "name": "<%= font.name %>",
+  "version": "<%= version %>",
   "className": "<%= className %>",
   "icons": <%= JSON.stringify(icons) %>
 }

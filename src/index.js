@@ -11,6 +11,7 @@ var iconfont = require('gulp-iconfont');
 var consolidate = require('gulp-consolidate');
 var xeditor = require("gulp-xml-editor");
 var clean = require('gulp-clean');
+var pkg = require('../package.json');
 
 ////////////////////////////////////////////////////////////////////////////////
 ///                          COMMAND FUNCTIONS                               ///
@@ -118,6 +119,7 @@ function cmdProcess(src, options, finalCb) {
         asyncTasks.push(function(cb) {
           gulp.src(path.resolve(templatesPath, 'catalog.json'))
             .pipe(consolidate('lodash', {
+              version: pkg.version,
               className: options.className,
               font: {
                 glyphs: fontGlyphs,
