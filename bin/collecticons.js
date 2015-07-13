@@ -20,7 +20,7 @@ program
   .option("--font-name <name>", "name of the font", 'collecticons')
   .option("--font-types <dest>", "font types to output (ttf,woff,eot) [ttf,woff,eot]", list, ['ttf', 'woff', 'eot'])
   .option("--font-dest <dest>", "destination folder for the font", 'collecticons/font/')
-  .option("--font-embed", "embed the font in the css")
+  .option("--font-embed", "embed the font in the css. When embedding, the font files are removed")
 
   .option("--class-name <name>", "class name to use", 'collecticon')
   .option("--style-format <dest>", "style formats to output (sass,css) [sass]", list, ['sass'])

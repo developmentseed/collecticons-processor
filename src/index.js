@@ -129,6 +129,12 @@ function cmdProcess(src, options, finalCb) {
         });
       }
 
+      // If the fonts were embedded we can delete them.
+      // Except the eot since it can't be embedded.
+      if (options.fontEmbed) {
+        options.fontTypes = _.without(options.fontTypes, 'ttf', 'woff');
+      }
+
       // Delete all except the ones to keep.
       var toDelete = _.difference(['woff2', 'ttf', 'woff', 'eot'], options.fontTypes);
       if (toDelete.length) {
