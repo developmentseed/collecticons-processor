@@ -4,6 +4,7 @@ var program = require('commander');
 var _ = require('lodash');
 var gulp = require('gulp');
 var async = require('async');
+var mkpath = require('mkpath');
 var archiver = require('archiver');
 var xeditor = require("gulp-xml-editor");
 var iconfont = require('gulp-iconfont');
@@ -138,7 +139,7 @@ function cmdProcess(src, options, finalCb) {
       // Delete all except the ones to keep.
       var toDelete = _.difference(['woff2', 'ttf', 'woff', 'eot'], options.fontTypes);
       if (toDelete.length) {
-        toDelete = toDelete.map(function(ext) { return options.fontDest + options.fontName + '.' + ext });
+        toDelete = toDelete.map(function(ext) { return path.resolve(options.fontDest, options.fontName + '.' + ext); });
         asyncTasks.push(function(cb) {
           gulp.src(toDelete, {read: false})
             .pipe(clean())
@@ -197,6 +198,8 @@ function cmdBundle(src, dest, options) {
       }, cb);
     }]
   }, function(err, results) {
+    // Create directory before creating write stream.
+    mkpath.sync(path.dirname(dest));
     // Zip
     var output = fs.createWriteStream(dest);
     var zipArchive = archiver('zip');
