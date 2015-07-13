@@ -6,11 +6,11 @@ var gulp = require('gulp');
 var async = require('async');
 var mkpath = require('mkpath');
 var archiver = require('archiver');
+var del = require('del');
 var xeditor = require("gulp-xml-editor");
 var iconfont = require('gulp-iconfont');
 var consolidate = require('gulp-consolidate');
 var xeditor = require("gulp-xml-editor");
-var clean = require('gulp-clean');
 var pkg = require('../package.json');
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -143,11 +143,7 @@ function cmdProcess(src, options, finalCb) {
       if (toDelete.length) {
         toDelete = toDelete.map(function(ext) { return path.resolve(options.fontDest, options.fontName + '.' + ext); });
         asyncTasks.push(function(cb) {
-          gulp.src(toDelete, {read: false})
-            .pipe(clean())
-            .on('data', function() {})
-            // Clean only emits end if there's the data event.
-            .on('end', function() { cb(null); });
+          del(toDelete, function() { cb(null); });
         });
       }
 
@@ -174,11 +170,7 @@ function cmdBundle(src, dest, options) {
 
   async.auto({
     clean: function(cb) {
-      gulp.src(tmpdir, {read: false})
-       .pipe(clean())
-       .on('data', function() {})
-       // Clean only emits end if there's the data event.
-       .on('end', function() { cb(null) });
+      del(tmpdir, function() { cb(null); });
     },
     gridlessSvg: ['clean', function(cb) {
       gulp.src(path.normalize(src + '/') + '*.svg')
@@ -207,8 +199,7 @@ function cmdBundle(src, dest, options) {
     var zipArchive = archiver('zip');
     output.on('close', function() {
       console.log('Bundle created', dest);
-      gulp.src(tmpdir, {read: false})
-       .pipe(clean());
+      del(tmpdir);
     });
 
     zipArchive.pipe(output);
