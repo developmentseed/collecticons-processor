@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  - "0.12"
+
+env:
+  global:
+  - GH_REF=github.com/developmentseed/collecticons-processor.git
+  - DEPLOY_BRANCH=master
+  - secure: "Ud6jYV6M4MOvs/O5ozfFl3mfdizyYX3Ftct01rOloMvDareVNb44l6QyszCa9wFeEor0TFuGuGHfVMMVF80KN6iEPRARykWlXXmSfsnpLgn2yLoMBNnrfavSgi/5kDyV3ptFdnWWB4Y0jj13eVGPhuwYMPTFj4VAlcZ5tz+cQLpmaIbPrBzE3TgOmUBKQ1d37Yl0m+FVSvp/6I19TG0aGPPN2bLPH/x7PWihfGbtd5pNCnOpQlwF/cj7b0hIjwK2Yutc1PtlBV8+DykVHCzSL7dhEpiAeQE+Hn3rA59QKahnhVf2Kr+Beb87F20bzXunpsjW0bkTQHx1bCYlNdBErWWmJKmNGE7xfKL+V4/fCCUay0dyHLKX+l+o5S4pFa/nofDZFx0gEz3uJ/tQrezDdSer+qADZALgEG2rp535+h2dIs1Gy099hh+oBf2uc6NrDIzRzvWM+aenn3H7MHQ02IzKELxVExiBzmuf5WVTk3pC/8VAzQtz+g/Eq6pmp/k7o0a1GpNZKZ7sJBSknTj1fDrx9aIUvUy/5QKYmlgWwS6URdgc53goHC9ivw8newyKMf/D3czGoX1LiUD+rXfSgEhFL6vKaCyhVaK6TjKssKKGWdG0yKcFZFLnCuhVwyU1qKOp9nXLJzjpUJMkGxXVIayAaeq5oukZZnSQFE2jD5M="
+
+cache:
+  directories:
+    - node_modules
+
+script:
+- npm test
