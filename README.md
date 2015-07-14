@@ -136,10 +136,12 @@ Creates a zip file with the fonts, css styles, and a gridless version of the ico
 ```
 $ collecticons bundle source/ destination.zip
 ```
-## Contributing
 
 ## Testing
 The testing is done using mocha. Use `npm test` to run the tests.
 
-## Licensing
-Collecticons is licensed under XPTO, see the LICENSE file for more details.
+## Contributing
+You are free to contribute to the project. If you find a bug and/or have a nice idea about a feature feel free to open an issue or submit your own solution. We'll be more than happy to hear your suggestions. :)
+
+## License
+Collecticons is licensed under **The MIT License (MIT)**, see the [LICENSE](LICENSE) file for more details.
