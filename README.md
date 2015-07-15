@@ -1,3 +1,5 @@
+[![collecticons-banner](https://cloud.githubusercontent.com/assets/1090606/8695447/fdef92fa-2adc-11e5-8979-b61bd96d24ca.png)](http://devseed.com/collecticons)
+
 # Collecticons processor
 > Processor script for [collecticon icon library](https://github.com/developmentseed/collecticons-lib).
 
