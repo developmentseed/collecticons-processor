@@ -1,8 +1,9 @@
 {
   "name": "collecticons-processor",
   "version": "1.0.0",
-  "description": "",
+  "description": "Processor script for the collecticon icon library",
   "main": "src/index.js",
+  "homepage": "https://github.com/developmentseed/collecticons-processor",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha tests/"
   },
@@ -13,8 +14,11 @@
     "type": "git",
     "url": "git://github.com/developmentseed/collecticons-processor"
   },
+  "author": {
+    "name": "Development Seed",
+    "url": "https://developmentseed.org"
+  },
   "preferGlobal": "true",
-  "author": "DevelopmentSeed",
   "license": "MIT",
   "dependencies": {
     "archiver": "^0.14.4",
