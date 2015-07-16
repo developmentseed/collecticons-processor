@@ -1,6 +1,6 @@
 [![collecticons-banner](https://cloud.githubusercontent.com/assets/1090606/8695447/fdef92fa-2adc-11e5-8979-b61bd96d24ca.png)](https://collecticons.io)
 
-# Collecticons processor
+# Collecticons processor [![Build Status](https://travis-ci.org/developmentseed/collecticons-processor.svg?branch=master)](https://travis-ci.org/developmentseed/collecticons-processor)
 > Processor script for [collecticon icon library](https://github.com/developmentseed/collecticons-lib).
 
 This utility is meant to be used to generate webfont (eot, woff, ttf) and style files (css, sass) from the [collecticon icon library](https://github.com/developmentseed/collecticons-lib).
