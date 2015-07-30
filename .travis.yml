@@ -1,12 +1,6 @@
 language: node_js
 node_js:
-  - "0.12"
-
-env:
-  global:
-  - GH_REF=github.com/developmentseed/collecticons-processor.git
-  - DEPLOY_BRANCH=master
-  - secure: "Ud6jYV6M4MOvs/O5ozfFl3mfdizyYX3Ftct01rOloMvDareVNb44l6QyszCa9wFeEor0TFuGuGHfVMMVF80KN6iEPRARykWlXXmSfsnpLgn2yLoMBNnrfavSgi/5kDyV3ptFdnWWB4Y0jj13eVGPhuwYMPTFj4VAlcZ5tz+cQLpmaIbPrBzE3TgOmUBKQ1d37Yl0m+FVSvp/6I19TG0aGPPN2bLPH/x7PWihfGbtd5pNCnOpQlwF/cj7b0hIjwK2Yutc1PtlBV8+DykVHCzSL7dhEpiAeQE+Hn3rA59QKahnhVf2Kr+Beb87F20bzXunpsjW0bkTQHx1bCYlNdBErWWmJKmNGE7xfKL+V4/fCCUay0dyHLKX+l+o5S4pFa/nofDZFx0gEz3uJ/tQrezDdSer+qADZALgEG2rp535+h2dIs1Gy099hh+oBf2uc6NrDIzRzvWM+aenn3H7MHQ02IzKELxVExiBzmuf5WVTk3pC/8VAzQtz+g/Eq6pmp/k7o0a1GpNZKZ7sJBSknTj1fDrx9aIUvUy/5QKYmlgWwS6URdgc53goHC9ivw8newyKMf/D3czGoX1LiUD+rXfSgEhFL6vKaCyhVaK6TjKssKKGWdG0yKcFZFLnCuhVwyU1qKOp9nXLJzjpUJMkGxXVIayAaeq5oukZZnSQFE2jD5M="
+  - '0.12'
 
 cache:
   directories:
@@ -17,8 +11,9 @@ script:
 
 deploy:
   provider: npm
-  email: "dev@developmentseed.org"
+  email: dev@developmentseed.org
   api_key:
-    secure: "CCk3OEQx3YaGXlwTRRfMJTnD2M1CFQ+zPYXE7/aGE6iiIlJpa8/hDjgMiQLPIzqrRAQl4cYAmMthkdqbNrovjF1wWN1BmS5Pie67nN7vcIaPBGCMOS4r0t9q4SXuS0ZAjPmA9xA4oSr7mex+rBPn2Mi3/xlsLC671G1U/78lIgOgPjLWQeH1f5Qh/9flao3hCwB5ZPDxZmVAmqk4komUgpBZvHTy+2/nyziM104NPg/3RWSUmI67Igz0msDAGg2tvOFkAgpdGr+BZhvOr9SFNKWVtzgK2ANmZUh45buctoZa9Ot51fd2MZyeyxmTM+dswTeF8bcygHu7GfOaZeues/7VEswCX+JxrR66bQ66u3RMg7GSbmgmvh0fw+wmOKq0PXqPV4BDiJio4BJnq373A63qwiXyyvtywpmEsmXDMm0Sw+vOBnC0bz8a8aJuTP//JLG8HVvgy6RRc/bTs18RcQbSL1z8VBdpJVfd58A/BJXlsK823DA63xhg9fZsL8oD11knItFAlburfooxttsgl0OI5QpKTkuAUlMcFAPrKHrQp5A4fRjaNnKei+aLp85rNb/4pHJJpvfBZLc+G0bDlQHRt40MgIU9aS5BcWE+bwde+VYvNnLR//Axws4LDQf0OX+yB0icUALiYIiaMfR68+vKZ2LHYi6m9yK7OddHCko="
+    secure: kcQg9RhrYFNlGPuwdTuPQa2OWFjHUACN/QERjgbziIExrfFIKuFXy5iLpgGB9ox8FMBNwFEzseSh9xK+NR7LrQ6UWSMm7mtEgBZ4iZM5NJLm/GL/PbTMVKvdMNmuOEhgyplGEy9ELcfWNdiHklXVf4HyZ2nKJQ9bLR/JMYoliSLc2xdppwzAwJtXhPBJsGKE9n+M6gvVLT9KoNWlnegledhjHZ2yZM4/HyTZOGtfM6ZQUL5zhRdfe3/VT5zPHxlyce3Kz5ygcmbadigo6BIYKTf41IyKpud/dQYRQ5tGhSm+U3DlxmfZIM/WfrU2NPjuEwiFkgjnzSJRGpRfkOtWkKfExTKH8xmMDT0Py1yYjoYqMve04izOZTDE4jh40ae6qYTFYiy9fABimijpK2tTpwAezWhNIK+q6r6HfLEyN1eW7AdCCWE3AJtoKNkk17zxWRAySzaRW2nbxQT/BiJ4bQGlpIBvUM9g+F4tmb04xkZPV+uF0MGE1ypusM+g6Gv73XqFDue7NB79DP79VPErZXQHRJcWiRItW+339uXKIYqdx9VeVRcJfBZXTGJEDilqPIP+73z5QcwknLFa8vBWyXuFfns7t5/Bae+rhxplmc+LjrKkH2mL/+4hw+JUU1xSqPOkCKl/UTZsM81RdjtX1scMfMNFmUwI2fBGHmcX98M=
   on:
     tags: true
+    repo: developmentseed/collecticons-processor
