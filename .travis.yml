@@ -14,3 +14,11 @@ cache:
 
 script:
 - npm test
+
+deploy:
+  provider: npm
+  email: "dev@developmentseed.org"
+  api_key:
+    secure: "CCk3OEQx3YaGXlwTRRfMJTnD2M1CFQ+zPYXE7/aGE6iiIlJpa8/hDjgMiQLPIzqrRAQl4cYAmMthkdqbNrovjF1wWN1BmS5Pie67nN7vcIaPBGCMOS4r0t9q4SXuS0ZAjPmA9xA4oSr7mex+rBPn2Mi3/xlsLC671G1U/78lIgOgPjLWQeH1f5Qh/9flao3hCwB5ZPDxZmVAmqk4komUgpBZvHTy+2/nyziM104NPg/3RWSUmI67Igz0msDAGg2tvOFkAgpdGr+BZhvOr9SFNKWVtzgK2ANmZUh45buctoZa9Ot51fd2MZyeyxmTM+dswTeF8bcygHu7GfOaZeues/7VEswCX+JxrR66bQ66u3RMg7GSbmgmvh0fw+wmOKq0PXqPV4BDiJio4BJnq373A63qwiXyyvtywpmEsmXDMm0Sw+vOBnC0bz8a8aJuTP//JLG8HVvgy6RRc/bTs18RcQbSL1z8VBdpJVfd58A/BJXlsK823DA63xhg9fZsL8oD11knItFAlburfooxttsgl0OI5QpKTkuAUlMcFAPrKHrQp5A4fRjaNnKei+aLp85rNb/4pHJJpvfBZLc+G0bDlQHRt40MgIU9aS5BcWE+bwde+VYvNnLR//Axws4LDQf0OX+yB0icUALiYIiaMfR68+vKZ2LHYi6m9yK7OddHCko="
+  on:
+    tags: true
