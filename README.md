@@ -5,9 +5,9 @@
 
 This utility is meant to be used to generate webfont (eot, woff, ttf) and style files (css, sass) from the [collecticon icon library](https://github.com/developmentseed/collecticons-lib).
 
-Install the module as a global dependency (npm package coming).
+Install the module as a global dependency.
 ```
-npm install -g developmentseed/collecticons-processor
+npm install -g collecticons-processor
 ```
 
 ## Usage
