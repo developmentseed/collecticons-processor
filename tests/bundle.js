@@ -7,6 +7,8 @@ var collecticons = __dirname + '/../bin/collecticons.js';
 
 
 describe('testing command bundle', function() {
+  this.slow(2000);
+
   after(function() {
     del(__dirname + '/results/test-bundle/');
   });

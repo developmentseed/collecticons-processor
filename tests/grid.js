@@ -5,6 +5,8 @@ var del = require('del');
 var collecticons = __dirname + '/../bin/collecticons.js';
 
 describe('testing command grid', function() {
+  this.slow(2000);
+
   after(function() {
     del(__dirname + '/results/test-grid/');
   });

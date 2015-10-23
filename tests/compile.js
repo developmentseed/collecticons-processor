@@ -13,6 +13,8 @@ var collecticons = __dirname + '/../bin/collecticons.js';
 // they'll differ.  
 
 describe('testing command compile', function() {
+  this.slow(2000);
+
   after(function() {
     del(__dirname + '/../collecticons');
     del(__dirname + '/results/test-compile');
@@ -187,6 +189,27 @@ describe('testing command compile', function() {
     });
   });
 
+  it("should output css and sass files with custom name", function(done) {
+    var args = [
+      collecticons,
+      'compile',
+      __dirname + '/fixtures/add_icon/',
+      '--style-format', 'css,sass',
+      '--style-name', 'custom-name',
+    ];
+
+    cp.spawn('node', args, {stdio: 'inherit'})
+    .on('close', function(code) {
+      var expected = [
+        'styles/_custom-name.scss',
+        'styles/custom-name.css'
+      ];
+      expected.forEach(function(f) {
+        assert.equal(existsSync(__dirname + '/../collecticons/' + f), true);
+      });
+      done();
+    });
+  });
 });
 
 function existsSync(filePath){
