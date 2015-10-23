@@ -11,6 +11,7 @@ var xeditor = require("gulp-xml-editor");
 var iconfont = require('gulp-iconfont');
 var consolidate = require('gulp-consolidate');
 var xeditor = require("gulp-xml-editor");
+var rename = require("gulp-rename");
 
 ////////////////////////////////////////////////////////////////////////////////
 ///                          COMMAND FUNCTIONS                               ///
@@ -73,6 +74,7 @@ function cmdProcess(src, options, finalCb) {
         asyncTasks.push(function(cb) {
           gulp.src(path.resolve(templatesPath, '_icons.scss'))
             .pipe(consolidate('lodash', stylFileOpts))
+            .pipe(rename('_' + options.styleName + '.scss'))
             .pipe(gulp.dest(options.styleDest))
             .on('end', function() { cb(null) });
         });
@@ -81,6 +83,7 @@ function cmdProcess(src, options, finalCb) {
         asyncTasks.push(function(cb) {
           gulp.src(path.resolve(templatesPath, 'icons.css'))
             .pipe(consolidate('lodash', stylFileOpts))
+            .pipe(rename(options.styleName + '.css'))
             .pipe(gulp.dest(options.styleDest))
             .on('end', function() { cb(null) });
         });
@@ -185,6 +188,7 @@ function cmdBundle(src, dest, options) {
         className: 'collecticon',
         styleFormat: ['css'],
         styleDest: tmpdir,
+        styleName: 'icons',
         previewDest: tmpdir,
         preview: true,
       }, cb);

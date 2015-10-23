@@ -7,6 +7,8 @@ var collecticons = __dirname + '/../bin/collecticons.js';
 
 
 describe('testing command bundle', function() {
+  this.slow(2000);
+
   after(function() {
     del(__dirname + '/results/test-bundle/');
   });
@@ -36,6 +38,7 @@ describe('testing command bundle', function() {
       new Decompress({mode: '755'})
        .src(__dirname + '/results/test-bundle/collecticons.test.zip')
        .dest(__dirname + '/results/test-bundle')
+       .use(Decompress.zip())
        .run(function() {
 
           zipContents.forEach(function(f) {

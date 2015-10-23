@@ -47,6 +47,7 @@ $ collecticons compile --help
     --class-name <name>    class name to use
     --style-format <dest>  style formats to output (sass,css) [sass]
     --style-dest <dest>    destination folder for the style files
+    --style-name <name>    file name for the style files
     --preview-dest <dest>  destination folder for the preview
     --no-preview           disable the preview
     --catalog-dest <dest>  destination folder for the catalog. Output disable by default
