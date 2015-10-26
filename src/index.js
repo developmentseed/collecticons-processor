@@ -26,7 +26,8 @@ function cmdProcess(src, options, finalCb) {
     .pipe(stripGrid('svgGrid'))
     .pipe(iconfont({
       fontName: options.fontName,
-      spawnWoff2: false
+      spawnWoff2: false,
+      normalize: options.normalise
     }))
     // After the font is converted, it emit the glyphs.
     // They are stored because at this point the font file is not on disk yet

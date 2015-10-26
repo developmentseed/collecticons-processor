@@ -30,6 +30,8 @@ program
   .option("--no-preview", "disable the preview")
 
   .option("--catalog-dest <dest>", "destination folder for the catalog. Output disable by default")
+  .option("--normalise", "Normalise icons by scaling them to the height of the highest icon.")
+
   .action(collecticons.process);
 
 program
