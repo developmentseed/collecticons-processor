@@ -23,7 +23,7 @@
   src: url('<%= font.path %>/<%= font.name %>.ttf');
   <% } %>
   <% if (woff.encode) { %>
-  src: url(data:application/font-woff;charset=utf-8;base64,<%= woff.encode %>) format('truetype');
+  src: url(data:application/font-woff;charset=utf-8;base64,<%= woff.encode %>) format('woff');
   <% } else if (woff.include) { %>
   src: url('<%= font.path %>/<%= font.name %>.woff');
   <% } %>
