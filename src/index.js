@@ -52,6 +52,7 @@ function cmdProcess (src, options, finalCb) {
 
       var stylFileOpts = {
         className: options.className,
+        includePlaceholder: options.placeholder,
         font: {
           glyphs: fontGlyphs,
           name: options.fontName,

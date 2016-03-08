@@ -45,8 +45,13 @@
 }
 
 <% _.each(font.glyphs, function(glyph) { %>
-.<%= className %>-<%= glyph.name %> {
+<% if (includePlaceholder) { %>
+%<%= className %>-<%= glyph.name %> {
   @extend .<%= className %>;
+  content: "\<%= glyph.unicode[0].charCodeAt(0).toString(16).toUpperCase() %>"
+}
+<% }%>
+.<%= className %>-<%= glyph.name %>:before {
   content: "\<%= glyph.unicode[0].charCodeAt(0).toString(16).toUpperCase() %>"
 }
 <% }); %>

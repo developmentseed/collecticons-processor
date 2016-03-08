@@ -26,6 +26,7 @@ program
   .option('--style-format <dest>', 'style formats to output (sass,css) [sass]', list, ['sass'])
   .option('--style-dest <dest>', 'destination folder for the style files', 'collecticons/styles/')
   .option('--style-name <name>', 'name for for the style files', 'icons')
+  .option('--no-placeholder', 'disable the sass placeholder')
 
   .option('--preview-dest <dest>', 'destination folder for the preview', 'collecticons/')
   .option('--no-preview', 'disable the preview')
