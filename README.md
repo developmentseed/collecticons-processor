@@ -44,10 +44,14 @@ $ collecticons compile --help
     --font-types <dest>    font types to output (ttf,woff,eot) [ttf,woff,eot]
     --font-dest <dest>     destination folder for the font
     --font-embed           embed the font in the css (except eot). When embedding, the font files are removed
+    --author-name <dest>   name of the author
+    --author-url <dest>    url of the author
     --class-name <name>    class name to use
     --style-format <dest>  style formats to output (sass,css) [sass]
     --style-dest <dest>    destination folder for the style files
-    --style-name <name>    file name for the style files
+    --style-name <name>    name for for the style files
+    --no-placeholder       disable the sass placeholder
+    --no-standalone        disable the css standalone classes
     --preview-dest <dest>  destination folder for the preview
     --no-preview           disable the preview
     --catalog-dest <dest>  destination folder for the catalog. Output disable by default
@@ -83,11 +87,12 @@ $ collecticons compile source/ --no-preview --style-dest assets/styles --font-ty
 ```
 
 #### Sass vs Css
-The script can output both `sass` and `css` fortmats but they have significant differences in the way they are structured.
+The script can output both `sass` and `css` formats but they have significant differences in the way they are structured.
 
 **css**
 ```css
-.collecticon, [class^="collecticon-"], [class*=" collecticon-"] {
+[class^="collecticon-"],
+[class*=" collecticon-"] {
   font-family: "collecticons";
   /* ... */
 }
@@ -105,17 +110,24 @@ With the `css` format, the icon can be used directly on an html element:
 **sass**
 
 ```scss
-.collecticon, [class^="collecticon-"], [class*=" collecticon-"] {
+%collecticon,
+[class^="collecticon-"],
+[class*=" collecticon-"] {
   font-family: "collecticons";
   // ...
 }
 
-.collecticon-add {
-  @extend .collecticon;
+.collecticon-add:before {
+  content: "\EA01"
+}
+
+%collecticon-add {
+  @extend %collecticon;
   content: "\EA01"
 }
 ```
-The `scss` format doesn't make any assumption to what pseudo selector is used (`before` or `after`) therefore some semanthic styling is required.
+Placeholders don't make any assumption to what pseudo selector is used (`before` or `after`) therefore some semantic styling is required.
+By default the `scss` also outputs the normal css classes so that icons can be used directly on an html element (see above) but this can be disabled.
 
 ```html
 <button class="bttn-add"></button>
@@ -123,7 +135,7 @@ The `scss` format doesn't make any assumption to what pseudo selector is used (`
 
 ```scss
 .bttn-add:before { // or .bttn-add:after {
-  @extend .collecticon-add;
+  @extend %collecticon-add;
 }
 ```
 Using this approach allows the usage of up to two icons per element (one per selector).
