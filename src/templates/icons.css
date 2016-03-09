@@ -1,9 +1,14 @@
-/*
-// ICONS
+/* ==========================================================================
+   Icon font: <%= font.name %>
+   ========================================================================== */
 
-// UI icon font: ds.o UI Icons
-// Designed by Development Seed
-*/
+/**<% if (author.name) { %>
+ * Designed by <%= author.name %><% if (author.url) { %>
+ * <%= author.url %><% } %>
+ *<% } %>
+ * Generated with collecticons-processor on <%= dateFormatted %>
+ * http://collecticons.io/
+ */
 
 <% if (eot.include) { %>
 @font-face {
@@ -32,16 +37,18 @@
 }
 <% } %>
 
-.<%= className %>, [class^="<%= className %>-"], [class*=" <%= className %>-"] {
-  font-family: "<%= font.name %>";
+[class^="<%= className %>-"],
+[class*=" <%= className %>-"] {
   speak: none;
+  font-family: "<%= font.name %>";
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
   text-transform: none;
-  vertical-align: bottom;
+  line-height: 1;
 
-  /* Better Font Rendering */
+  /* Better font rendering */
+  text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
