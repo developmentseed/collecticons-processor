@@ -20,6 +20,9 @@ function cmdProcess (src, options, finalCb) {
   var templatesPath = __dirname + '/../src/templates/';
   var asyncTasks = [];
 
+  var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  var nowDate = new Date();
+
   gulp.src(src)
     // Remove svg grid.
     .pipe(stripGrid('svgGrid'))
@@ -53,6 +56,11 @@ function cmdProcess (src, options, finalCb) {
       var stylFileOpts = {
         className: options.className,
         includePlaceholder: options.placeholder,
+        dateFormatted: months[nowDate.getMonth()] + ' ' + nowDate.getDate() + ', ' + nowDate.getFullYear(),
+        author: {
+          name: options.authorName,
+          url: options.authorUrl
+        },
         font: {
           glyphs: fontGlyphs,
           name: options.fontName,

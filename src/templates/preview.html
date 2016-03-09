@@ -112,15 +112,16 @@
       }
 
       .<%= className %>, [class^="<%= className %>-"], [class*=" <%= className %>-"] {
-        font-family: "<%= font.name %>";
         speak: none;
+        font-family: "<%= font.name %>";
         font-style: normal;
         font-weight: normal;
         font-variant: normal;
         text-transform: none;
-        vertical-align: bottom;
+        line-height: 1;
 
-        // Better Font Rendering
+        /* Better font rendering */
+        text-rendering: auto;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
       }

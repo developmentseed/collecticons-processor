@@ -22,6 +22,9 @@ program
   .option('--font-dest <dest>', 'destination folder for the font', 'collecticons/font/')
   .option('--font-embed', 'embed the font in the css (except eot). When embedding, the font files are removed')
 
+  .option('--author-name <dest>', 'name of the author')
+  .option('--author-url <dest>', 'url of the author')
+
   .option('--class-name <name>', 'class name to use', 'collecticon')
   .option('--style-format <dest>', 'style formats to output (sass,css) [sass]', list, ['sass'])
   .option('--style-dest <dest>', 'destination folder for the style files', 'collecticons/styles/')
