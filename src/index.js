@@ -56,6 +56,7 @@ function cmdProcess (src, options, finalCb) {
       var stylFileOpts = {
         className: options.className,
         includePlaceholder: options.placeholder,
+        includeStandalone: options.standalone,
         dateFormatted: months[nowDate.getMonth()] + ' ' + nowDate.getDate() + ', ' + nowDate.getFullYear(),
         author: {
           name: options.authorName,

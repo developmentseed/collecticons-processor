@@ -54,14 +54,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-<% _.each(font.glyphs, function(glyph) { %>
-<% if (includePlaceholder) { %>
+<% _.each(font.glyphs, function(glyph) { %><% if (includePlaceholder) { %>
 %<%= className %>-<%= glyph.name %> {
   @extend %<%= className %>;
   content: "\<%= glyph.unicode[0].charCodeAt(0).toString(16).toUpperCase() %>"
-}
-<% }%>
+}<% }%><% if (includeStandalone) { %>
 .<%= className %>-<%= glyph.name %>:before {
   content: "\<%= glyph.unicode[0].charCodeAt(0).toString(16).toUpperCase() %>"
-}
+}<% }%>
 <% }); %>
