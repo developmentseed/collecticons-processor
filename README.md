@@ -101,10 +101,11 @@ The script can output both `sass` and `css` formats but they have significant di
   content: "\EA01"
 }
 ```
-With the `css` format, the icon can be used directly on an html element:
+
+You can place Collecticons just about anywhere using the respective CSS class. The icon library is designed to be used with inline elements (we like the `<i>` tag for brevity, but using a `<span>` is more semantically correct).
 
 ```html
-<button class="collecticon-add"></button>
+<button><i class="ocollecticon-add"></i> Add</button>
 ```
 
 **sass**
@@ -130,7 +131,7 @@ Placeholders don't make any assumption to what pseudo selector is used (`before`
 By default the `scss` also outputs the normal css classes so that icons can be used directly on an html element (see above) but this can be disabled.
 
 ```html
-<button class="bttn-add"></button>
+<button class="bttn-add">Add</button>
 ```
 
 ```scss
