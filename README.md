@@ -79,11 +79,17 @@ $ collecticons compile source/ --no-preview --font-dest assets/fonts --style-des
 ```
 
 #### Font embed
-If you're working with modern browsers and just want to embed the font in the sass file you can use the `--font-embed` flag.
-> Note: You can use `--font-types none` to ensure that no additional fonts are output.
+If you're working with modern browsers and just want to embed the WOFF or TTF font in the sass file, you can use `--font-embed`. In this case, no font files will be stored.
 
 ```
-$ collecticons compile source/ --no-preview --style-dest assets/styles --font-types none --font-embed
+$ collecticons compile source/ --no-preview --style-dest assets/styles --font-types woff --font-embed
+```
+
+#### Font types
+The `--font-types` flag allows you to limit the output formats to particular types.
+
+```
+$ collecticons compile source/ --font-types [eot,woff]
 ```
 
 #### Sass vs Css
