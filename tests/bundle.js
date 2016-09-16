@@ -2,7 +2,7 @@ var fs = require('fs');
 var cp = require('child_process');
 var assert = require('assert');
 var del = require('del');
-var Decompress = require('decompress');
+var decompress = require('decompress');
 var collecticons = __dirname + '/../bin/collecticons.js';
 
 describe('testing command bundle', function () {
@@ -33,16 +33,14 @@ describe('testing command bundle', function () {
       ];
 
       // unzip and check contents.
-      new Decompress({mode: '755'})
-        .src(__dirname + '/results/test-bundle/collecticons.test.zip')
-        .dest(__dirname + '/results/test-bundle')
-        .use(Decompress.zip())
-        .run(function () {
-          zipContents.forEach(function (f) {
-            assert.equal(existsSync(__dirname + '/results/test-bundle/' + f), true, 'Missing ' + f);
-          });
-          done();
+      var src = __dirname + '/results/test-bundle/collecticons.test.zip';
+      var dist = __dirname + '/results/test-bundle';
+      decompress(src, dist).then(function (files) {
+        zipContents.forEach(function (f) {
+          assert.equal(existsSync(__dirname + '/results/test-bundle/' + f), true, 'Missing ' + f);
         });
+        done();
+      });
     });
   });
 });
