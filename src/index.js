@@ -28,7 +28,7 @@ function cmdProcess (src, options, finalCb) {
     .pipe(stripGrid('svgGrid'))
     .pipe(iconfont({
       fontName: options.fontName,
-      spawnWoff2: false,
+      formats: ['ttf', 'eot', 'woff'],
       normalize: true,
       fontHeight: 1024
     }))
@@ -183,14 +183,14 @@ function cmdBundle (src, dest, options) {
     clean: function (cb) {
       del(tmpdir).then(function () { cb(null); });
     },
-    gridlessSvg: ['clean', function (cb) {
+    gridlessSvg: ['clean', function (res, cb) {
       gulp.src(path.normalize(src + '/') + '*.svg')
         // Remove svg grid.
         .pipe(stripGrid('svgGrid'))
         .pipe(gulp.dest(tmpdir + 'svg/'))
         .on('end', function () { cb(null); });
     }],
-    process: ['clean', function (cb) {
+    process: ['clean', function (res, cb) {
       cmdProcess(src, {
         fontName: 'collecticons',
         fontTypes: ['ttf', 'woff', 'eot'],
