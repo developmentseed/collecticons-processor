@@ -6,7 +6,7 @@ var async = require('async');
 var mkpath = require('mkpath');
 var archiver = require('archiver');
 var del = require('del');
-var xeditor = require('gulp-xml-editor');
+var xmlTransformer = require('gulp-xml-transformer');
 var iconfont = require('gulp-iconfont');
 var consolidate = require('gulp-consolidate');
 var rename = require('gulp-rename');
@@ -17,7 +17,7 @@ var rename = require('gulp-rename');
 function cmdProcess (src, options, finalCb) {
   var fontGlyphs = null;
   src = path.normalize(src + '/') + '*.svg';
-  var templatesPath = __dirname + '/../src/templates/';
+  var templatesPath = path.join(__dirname, '/../src/templates/');
   var asyncTasks = [];
 
   var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -228,7 +228,7 @@ function cmdBundle (src, dest, options) {
 //                            HELPER FUNCTIONS                               ///
 // /////////////////////////////////////////////////////////////////////////////
 var stripGrid = function (gridId) {
-  return xeditor(function (xml, xmljs) {
+  return xmlTransformer(function (xml, xmljs) {
     var grid = xml.get('//xmlns:g[@id="' + gridId + '"]', 'http://www.w3.org/2000/svg');
     if (grid) {
       grid.remove();

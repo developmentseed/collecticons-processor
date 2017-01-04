@@ -1,27 +1,28 @@
 var fs = require('fs');
+var path = require('path');
 var cp = require('child_process');
 var assert = require('assert');
 var del = require('del');
 var decompress = require('decompress');
-var collecticons = __dirname + '/../bin/collecticons.js';
+var collecticons = path.join(__dirname, '/../bin/collecticons.js');
 
 describe('testing command bundle', function () {
   this.slow(2000);
 
   after(function () {
-    del(__dirname + '/results/test-bundle/');
+    del(path.join(__dirname, '/results/test-bundle/'));
   });
 
   it('should output zip file', function (done) {
     var args = [
       collecticons,
       'bundle',
-      __dirname + '/fixtures/add_icon/', __dirname + '/results/test-bundle/collecticons.test.zip'
+      path.join(__dirname, '/fixtures/add_icon/'), path.join(__dirname, '/results/test-bundle/collecticons.test.zip')
     ];
 
     cp.spawn('node', args, {stdio: 'inherit'})
     .on('close', function (code) {
-      assert.equal(existsSync(__dirname + '/results/test-bundle/collecticons.test.zip'), true);
+      assert.equal(existsSync(path.join(__dirname, '/results/test-bundle/collecticons.test.zip')), true);
 
       var zipContents = [
         'icons.css',
@@ -33,11 +34,11 @@ describe('testing command bundle', function () {
       ];
 
       // unzip and check contents.
-      var src = __dirname + '/results/test-bundle/collecticons.test.zip';
-      var dist = __dirname + '/results/test-bundle';
+      var src = path.join(__dirname, '/results/test-bundle/collecticons.test.zip');
+      var dist = path.join(__dirname, '/results/test-bundle');
       decompress(src, dist).then(function (files) {
         zipContents.forEach(function (f) {
-          assert.equal(existsSync(__dirname + '/results/test-bundle/' + f), true, 'Missing ' + f);
+          assert.equal(existsSync(path.join(__dirname, '/results/test-bundle/', f)), true, 'Missing ' + f);
         });
         done();
       });

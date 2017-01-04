@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "homepage": "https://github.com/developmentseed/collecticons-processor",
   "scripts": {
-    "lint": "eslint bin/ src/ test/ --ext .js",
+    "lint": "eslint bin/ src/ tests/ --ext .js",
     "test": "./node_modules/mocha/bin/mocha --timeout 5000 tests/"
   },
   "bin": {
@@ -30,7 +30,7 @@
     "gulp-consolidate": "^0.2.0",
     "gulp-iconfont": "^8.0.0",
     "gulp-rename": "^1.2.2",
-    "gulp-xml-editor": "^2.2.1",
+    "gulp-xml-transformer": "^1.2.0",
     "lodash": "^4.15.0",
     "mkpath": "^1.0.0"
   },
