@@ -1,8 +1,9 @@
 var fs = require('fs');
+var path = require('path');
 var cp = require('child_process');
 var assert = require('assert');
 var del = require('del');
-var collecticons = __dirname + '/../bin/collecticons.js';
+var collecticons = path.join(__dirname, '/../bin/collecticons.js');
 
 // This file tests the compile command of collecticons.
 // Right now it only tests whether the files are output or not.
@@ -15,12 +16,12 @@ describe('testing command compile', function () {
   this.slow(2000);
 
   after(function () {
-    del(__dirname + '/../collecticons');
-    del(__dirname + '/results/test-compile');
+    del(path.join(__dirname, '/../collecticons'));
+    del(path.join(__dirname, '/results/test-compile'));
   });
 
   beforeEach(function () {
-    del(__dirname + '/results/test-compile');
+    del(path.join(__dirname, '/results/test-compile'));
   });
 
   // Start tests.
@@ -28,7 +29,7 @@ describe('testing command compile', function () {
     var args = [
       collecticons,
       'compile',
-      __dirname + '/fixtures/add_icon/'
+      path.join(__dirname, '/fixtures/add_icon/')
     ];
 
     cp.spawn('node', args, {stdio: 'inherit'})
@@ -41,7 +42,7 @@ describe('testing command compile', function () {
         'font/collecticons.eot'
       ];
       expected.forEach(function (f) {
-        assert.equal(existsSync(__dirname + '/../collecticons/' + f), true);
+        assert.equal(existsSync(path.join(__dirname, '/../collecticons/', f)), true);
       });
       done();
     });
@@ -51,10 +52,10 @@ describe('testing command compile', function () {
     var args = [
       collecticons,
       'compile',
-      __dirname + '/fixtures/add_icon/',
-      '--font-dest', __dirname + '/results/test-compile',
-      '--style-dest', __dirname + '/results/test-compile',
-      '--preview-dest', __dirname + '/results/test-compile'
+      path.join(__dirname, '/fixtures/add_icon/'),
+      '--font-dest', path.join(__dirname, '/results/test-compile'),
+      '--style-dest', path.join(__dirname, '/results/test-compile'),
+      '--preview-dest', path.join(__dirname, '/results/test-compile')
     ];
 
     cp.spawn('node', args, {stdio: 'inherit'})
@@ -67,7 +68,7 @@ describe('testing command compile', function () {
         'collecticons.eot'
       ];
       expected.forEach(function (f) {
-        assert.equal(existsSync(__dirname + '/results/test-compile/' + f), true, 'Missing: ' + f);
+        assert.equal(existsSync(path.join(__dirname, '/results/test-compile/', f)), true, 'Missing: ' + f);
       });
       done();
     });
@@ -77,15 +78,15 @@ describe('testing command compile', function () {
     var args = [
       collecticons,
       'compile',
-      __dirname + '/fixtures/add_icon/',
-      '--font-dest', __dirname + '/results/test-compile',
-      '--style-dest', __dirname + '/results/test-compile',
+      path.join(__dirname, '/fixtures/add_icon/'),
+      '--font-dest', path.join(__dirname, '/results/test-compile'),
+      '--style-dest', path.join(__dirname, '/results/test-compile'),
       '--no-preview'
     ];
 
     cp.spawn('node', args, {stdio: 'inherit'})
     .on('close', function (code) {
-      assert.equal(existsSync(__dirname + '/results/test-compile/preview.html'), false);
+      assert.equal(existsSync(path.join(__dirname, '/results/test-compile/preview.html')), false);
       done();
     });
   });
@@ -94,16 +95,16 @@ describe('testing command compile', function () {
     var args = [
       collecticons,
       'compile',
-      __dirname + '/fixtures/add_icon/',
-      '--font-dest', __dirname + '/results/test-compile',
-      '--style-dest', __dirname + '/results/test-compile',
-      '--catalog-dest', __dirname + '/results/test-compile',
+      path.join(__dirname, '/fixtures/add_icon/'),
+      '--font-dest', path.join(__dirname, '/results/test-compile'),
+      '--style-dest', path.join(__dirname, '/results/test-compile'),
+      '--catalog-dest', path.join(__dirname, '/results/test-compile'),
       '--no-preview'
     ];
 
     cp.spawn('node', args, {stdio: 'inherit'})
     .on('close', function (code) {
-      assert.equal(existsSync(__dirname + '/results/test-compile/catalog.json'), true);
+      assert.equal(existsSync(path.join(__dirname, '/results/test-compile/catalog.json')), true);
       done();
     });
   });
@@ -112,18 +113,18 @@ describe('testing command compile', function () {
     var args = [
       collecticons,
       'compile',
-      __dirname + '/fixtures/add_icon/',
-      '--font-dest', __dirname + '/results/test-compile',
+      path.join(__dirname, '/fixtures/add_icon/'),
+      '--font-dest', path.join(__dirname, '/results/test-compile'),
       '--font-types', 'woff',
-      '--style-dest', __dirname + '/results/test-compile',
+      '--style-dest', path.join(__dirname, '/results/test-compile'),
       '--no-preview'
     ];
 
     cp.spawn('node', args, {stdio: 'inherit'})
     .on('close', function (code) {
-      assert.equal(existsSync(__dirname + '/results/test-compile/collecticons.woff'), true);
-      assert.equal(existsSync(__dirname + '/results/test-compile/collecticons.eot'), false);
-      assert.equal(existsSync(__dirname + '/results/test-compile/collecticons.ttf'), false);
+      assert.equal(existsSync(path.join(__dirname, '/results/test-compile/collecticons.woff')), true);
+      assert.equal(existsSync(path.join(__dirname, '/results/test-compile/collecticons.eot')), false);
+      assert.equal(existsSync(path.join(__dirname, '/results/test-compile/collecticons.ttf')), false);
       done();
     });
   });
@@ -132,18 +133,18 @@ describe('testing command compile', function () {
     var args = [
       collecticons,
       'compile',
-      __dirname + '/fixtures/add_icon/',
-      '--font-dest', __dirname + '/results/test-compile',
+      path.join(__dirname, '/fixtures/add_icon/'),
+      '--font-dest', path.join(__dirname, '/results/test-compile'),
       '--font-types', 'woff,ttf',
-      '--style-dest', __dirname + '/results/test-compile',
+      '--style-dest', path.join(__dirname, '/results/test-compile'),
       '--no-preview'
     ];
 
     cp.spawn('node', args, {stdio: 'inherit'})
     .on('close', function (code) {
-      assert.equal(existsSync(__dirname + '/results/test-compile/collecticons.woff'), true);
-      assert.equal(existsSync(__dirname + '/results/test-compile/collecticons.eot'), false);
-      assert.equal(existsSync(__dirname + '/results/test-compile/collecticons.ttf'), true);
+      assert.equal(existsSync(path.join(__dirname, '/results/test-compile/collecticons.woff')), true);
+      assert.equal(existsSync(path.join(__dirname, '/results/test-compile/collecticons.eot')), false);
+      assert.equal(existsSync(path.join(__dirname, '/results/test-compile/collecticons.ttf')), true);
       done();
     });
   });
@@ -152,18 +153,18 @@ describe('testing command compile', function () {
     var args = [
       collecticons,
       'compile',
-      __dirname + '/fixtures/add_icon/',
-      '--font-dest', __dirname + '/results/test-compile',
+      path.join(__dirname, '/fixtures/add_icon/'),
+      '--font-dest', path.join(__dirname, '/results/test-compile'),
       '--font-embed',
-      '--style-dest', __dirname + '/results/test-compile',
+      '--style-dest', path.join(__dirname, '/results/test-compile'),
       '--no-preview'
     ];
 
     cp.spawn('node', args, {stdio: 'inherit'})
     .on('close', function (code) {
-      assert.equal(existsSync(__dirname + '/results/test-compile/collecticons.woff'), false);
-      assert.equal(existsSync(__dirname + '/results/test-compile/collecticons.eot'), true);
-      assert.equal(existsSync(__dirname + '/results/test-compile/collecticons.ttf'), false);
+      assert.equal(existsSync(path.join(__dirname, '/results/test-compile/collecticons.woff')), false);
+      assert.equal(existsSync(path.join(__dirname, '/results/test-compile/collecticons.eot')), true);
+      assert.equal(existsSync(path.join(__dirname, '/results/test-compile/collecticons.ttf')), false);
       done();
     });
   });
@@ -172,17 +173,17 @@ describe('testing command compile', function () {
     var args = [
       collecticons,
       'compile',
-      __dirname + '/fixtures/add_icon/',
-      '--font-dest', __dirname + '/results/test-compile',
-      '--style-dest', __dirname + '/results/test-compile',
+      path.join(__dirname, '/fixtures/add_icon/'),
+      '--font-dest', path.join(__dirname, '/results/test-compile'),
+      '--style-dest', path.join(__dirname, '/results/test-compile'),
       '--style-format', 'css,sass',
       '--no-preview'
     ];
 
     cp.spawn('node', args, {stdio: 'inherit'})
     .on('close', function (code) {
-      assert.equal(existsSync(__dirname + '/results/test-compile/icons.css'), true);
-      assert.equal(existsSync(__dirname + '/results/test-compile/_icons.scss'), true);
+      assert.equal(existsSync(path.join(__dirname, '/results/test-compile/icons.css')), true);
+      assert.equal(existsSync(path.join(__dirname, '/results/test-compile/_icons.scss')), true);
       done();
     });
   });
@@ -191,7 +192,7 @@ describe('testing command compile', function () {
     var args = [
       collecticons,
       'compile',
-      __dirname + '/fixtures/add_icon/',
+      path.join(__dirname, '/fixtures/add_icon/'),
       '--style-format', 'css,sass',
       '--style-name', 'custom-name'
     ];
@@ -203,7 +204,7 @@ describe('testing command compile', function () {
         'styles/custom-name.css'
       ];
       expected.forEach(function (f) {
-        assert.equal(existsSync(__dirname + '/../collecticons/' + f), true);
+        assert.equal(existsSync(path.join(__dirname, '/../collecticons/', f)), true);
       });
       done();
     });
