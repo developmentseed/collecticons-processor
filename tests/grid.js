@@ -18,9 +18,9 @@ describe('testing command grid', function () {
 
     cp.spawn('node', args, {stdio: 'inherit'})
     .on('close', function (code) {
-      assert.deepEqual(
-        new Parser().parseFromString(fs.readFileSync(path.join(__dirname, '/results/test-grid/add.svg'), {encoding: 'utf8'})),
-        new Parser().parseFromString(fs.readFileSync(path.join(__dirname, '/expected/add.svg'), {encoding: 'utf8'}))
+      assert.equal(
+        new Parser().parseFromString(fs.readFileSync(path.join(__dirname, '/results/test-grid/add.svg'), {encoding: 'utf8'})).toString(),
+        new Parser().parseFromString(fs.readFileSync(path.join(__dirname, '/expected/add.svg'), {encoding: 'utf8'})).toString()
       );
       done();
     });
