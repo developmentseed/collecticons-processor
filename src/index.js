@@ -241,31 +241,36 @@ var stripGrid = function (gridId) {
     } else {
       vinylToString(file, enc)
         .then(xml => {
-          var doc = new xmldom.DOMParser().parseFromString(xml); 
+          var doc = new xmldom.DOMParser().parseFromString(xml);
           var grid = select('//svg:g[@id="' + gridId + '"]', doc, true);
-          var parent = grid.parentNode;
-          parent.removeChild(grid);
-          var transformedXml = new xmldom.XMLSerializer()
-            .serializeToString(doc)
-            .replace(/\r\n/g, '\n');
-          ;
+          if (grid) {
+            // There's a grid, remove it.
+            var parent = grid.parentNode;
+            parent.removeChild(grid);
+            var transformedXml = new xmldom.XMLSerializer()
+              .serializeToString(doc)
+              .replace(/\r\n/g, '\n');
 
-          if (file.isBuffer()) {
-            newFile.contents = new Buffer(transformedXml);
-          } else /* if (file.isStream()) */ {
-            // start the transformation
-            newFile.contents = through();
-            newFile.contents.write(transformedXml);
-            newFile.contents.end();
+            if (file.isBuffer()) {
+              newFile.contents = new Buffer(transformedXml);
+            } else /* if (file.isStream()) */ {
+              // start the transformation
+              newFile.contents = through();
+              newFile.contents.write(transformedXml);
+              newFile.contents.end();
+            }
+
+            // make sure the file goes through the next gulp plugin
+            this.push(newFile);
+          } else {
+            // Do nothing.
+            this.push(file);
           }
-
-          // make sure the file goes through the next gulp plugin
-          this.push(newFile);
           cb();
         })
         .catch(cb);
     }
-  }); 
+  });
 };
 
 // /////////////////////////////////////////////////////////////////////////////
