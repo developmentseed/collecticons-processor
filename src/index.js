@@ -6,7 +6,11 @@ var async = require('async');
 var mkpath = require('mkpath');
 var archiver = require('archiver');
 var del = require('del');
-var xmlTransformer = require('gulp-xml-transformer');
+var xmldom = require('xmldom');
+var through = require('through2');
+var vinylToString = require('vinyl-contents-tostring');
+var xpath = require('xpath');
+var select = xpath.useNamespaces({'svg': 'http://www.w3.org/2000/svg'});
 var iconfont = require('gulp-iconfont');
 var consolidate = require('gulp-consolidate');
 var rename = require('gulp-rename');
@@ -228,12 +232,44 @@ function cmdBundle (src, dest, options) {
 //                            HELPER FUNCTIONS                               ///
 // /////////////////////////////////////////////////////////////////////////////
 var stripGrid = function (gridId) {
-  return xmlTransformer(function (xml, xmljs) {
-    var grid = xml.get('//xmlns:g[@id="' + gridId + '"]', 'http://www.w3.org/2000/svg');
-    if (grid) {
-      grid.remove();
+  return through.obj(function (file, enc, cb) {
+    var newFile = file.clone();
+
+    if (file.isNull()) {
+      this.push(newFile);
+      cb();
+    } else {
+      vinylToString(file, enc)
+        .then(xml => {
+          var doc = new xmldom.DOMParser().parseFromString(xml);
+          var grid = select('//svg:g[@id="' + gridId + '"]', doc, true);
+          if (grid) {
+            // There's a grid, remove it.
+            var parent = grid.parentNode;
+            parent.removeChild(grid);
+            var transformedXml = new xmldom.XMLSerializer()
+              .serializeToString(doc)
+              .replace(/\r\n/g, '\n');
+
+            if (file.isBuffer()) {
+              newFile.contents = new Buffer(transformedXml);
+            } else /* if (file.isStream()) */ {
+              // start the transformation
+              newFile.contents = through();
+              newFile.contents.write(transformedXml);
+              newFile.contents.end();
+            }
+
+            // make sure the file goes through the next gulp plugin
+            this.push(newFile);
+          } else {
+            // Do nothing.
+            this.push(file);
+          }
+          cb();
+        })
+        .catch(cb);
     }
-    return xml;
   });
 };
 
