@@ -1,0 +1,53 @@
+/* ==========================================================================
+   Icon font: collecticons
+   ========================================================================== */
+
+/**
+ * Designed by Development Seed
+ * https://developmentseed.org/
+ *
+ * Generated with collecticons-processor on January 1st, 2019
+ * http://collecticons.io/
+ */
+
+@font-face {
+  font-family: "collecticons";
+  src: url('fonts/collecticons.woff');
+  src: url('fonts/collecticons.woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+%collecticons,
+[class^="collecticons-"],
+[class*=" collecticons-"] {
+  speak: none;
+  font-family: "collecticons";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+
+  /* Better font rendering */
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+%collecticons-book {
+  @extend %collecticons;
+  content: "\F101";
+}
+
+.collecticons-book:before {
+  content: "\F101";
+}
+
+%collecticons-chevron-left {
+  @extend %collecticons;
+  content: "\F102";
+}
+
+.collecticons-chevron-left:before {
+  content: "\F102";
+}
