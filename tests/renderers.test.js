@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs-extra');
 const { assert } = require('chai');
 
-const { renderSass, renderCss } = require('../src/renderers');
+const { renderSass, renderCss, renderCatalog } = require('../src/renderers');
 
 const renderSassBase = {
   fontName: 'collecticons',
@@ -184,5 +184,52 @@ describe('Renderers', function () {
       const expected = await fs.readFile(path.resolve(__dirname, 'expected/renderCss/renderCss-embed-woff2.css'), 'utf8');
       assert.equal(result, expected);
     });
+  });
+
+  describe('renderCatalog', function () {
+    it('Throw error when variables are missing', async function () {
+      try {
+        await renderCatalog();
+      } catch (error) {
+        assert.instanceOf(error, ReferenceError);
+        return;
+      }
+      assert.fail('Error not thrown');
+    });
+
+    it('Should render catalog as json', async function () {
+      const result = await renderCatalog({
+        fontName: 'collecticons',
+        className: 'collecticons',
+        icons: [
+          {
+            name: 'book',
+            codepoint: 0xf101
+          },
+          {
+            name: 'chevron-left',
+            codepoint: 0xf102
+          }
+        ]
+      });
+
+      const expected = JSON.stringify({
+        name: 'collecticons',
+        className: 'collecticons',
+        icons: [
+          {
+            icon: 'collecticons-book',
+            charCode: '\\F101'
+          },
+          {
+            icon: 'collecticons-chevron-left',
+            charCode: '\\F102'
+          }
+        ]
+      });
+
+      assert.equal(result, expected);
+    });
+  });
   });
 });

@@ -1,3 +1,7 @@
+const { logger } = require('../src/utils');
+
+logger.setLevel(0);
+
 describe('Collecticons', function () {
   require('./utils.test');
   require('./font-generator.test');
