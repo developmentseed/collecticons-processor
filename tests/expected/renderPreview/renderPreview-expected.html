@@ -4,24 +4,23 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <title>Font preview</title>
+    <title>Font preview - collecticons</title>
 
     <style type="text/css">
       @font-face {
-        font-family: "<%= font.name %>";
-        src: url(data:application/font-woff;charset=utf-8;base64,<%= font.encodedWoff %>) format('woff');
+        font-family: "collecticons";
+        src: url(data:application/font-woff2;charset=utf-8;base64,d29mZjIgZm9udA==) format('woff2');
         font-weight: normal;
         font-style: normal;
       }
 
-      .<%= className %>, [class^="<%= className %>-"], [class*=" <%= className %>-"] {
+      .collecticons, [class^="collecticons-"], [class*=" collecticons-"] {
         speak: none;
-        font-family: "<%= font.name %>";
+        font-family: "collecticons";
         font-style: normal;
         font-weight: normal;
         font-variant: normal;
         text-transform: none;
-        line-height: 1;
 
         /* Better font rendering */
         text-rendering: auto;
@@ -29,11 +28,13 @@
         -moz-osx-font-smoothing: grayscale;
       }
 
-      <% _.each(font.glyphs, function(glyph) { %>
-      .<%= className %>-<%= glyph.name %>:before {
-        content: "\<%= glyph.unicode[0].charCodeAt(0).toString(16).toUpperCase() %>"
+      .collecticons-book:before {
+        content: "\F101";
       }
-      <% }); %>
+
+      .collecticons-chevron-left:before {
+        content: "\F102";
+      }
     </style>
 
     <style type="text/css">
@@ -138,9 +139,8 @@
       </ul>
 
       <ul id="list" class="icons-list">
-        <% _.each(font.glyphs, function(glyph) { %>
-        <li><i class="ico icon <%= className %>-<%= glyph.name %>"></i><span class="label"><%= glyph.name %></span></li>
-        <% }); %>
+        <li><i class="ico icon collecticons-book"></i><span class="label">book</span></li>
+        <li><i class="ico icon collecticons-chevron-left"></i><span class="label">chevron-left</span></li>
       </ul>
     </div>
 

@@ -12,8 +12,9 @@ async function renderSass (opts = {}) {
   return ejs.render(tpl, opts);
 }
 
-async function renderPreview (opts) {
-  
+async function renderPreview (opts = {}) {
+  const tpl = await fs.readFile(path.resolve(__dirname, 'html.ejs'), 'utf8');
+  return ejs.render(tpl, opts);
 }
 
 async function renderCatalog (opts = {}) {

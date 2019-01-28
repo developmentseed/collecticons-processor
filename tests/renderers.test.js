@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs-extra');
 const { assert } = require('chai');
 
-const { renderSass, renderCss, renderCatalog } = require('../src/renderers');
+const { renderSass, renderCss, renderCatalog, renderPreview } = require('../src/renderers');
 
 const renderSassBase = {
   fontName: 'collecticons',
@@ -231,5 +231,45 @@ describe('Renderers', function () {
       assert.equal(result, expected);
     });
   });
+
+  describe('renderPreview', function () {
+    it('Throw error when variables are missing', async function () {
+      try {
+        await renderPreview();
+      } catch (error) {
+        assert.instanceOf(error, ReferenceError);
+        return;
+      }
+      assert.fail('Error not thrown');
+    });
+
+    it('Should render the html preview', async function () {
+      const result = await renderPreview({
+        fontName: 'collecticons',
+
+        fonts: {
+          woff2: {
+            contents: Buffer.from('woff2 font'),
+            path: 'fonts/collecticons.woff2'
+          }
+        },
+
+        className: 'collecticons',
+
+        icons: [
+          {
+            name: 'book',
+            codepoint: 0xf101
+          },
+          {
+            name: 'chevron-left',
+            codepoint: 0xf102
+          }
+        ]
+      });
+
+      const expected = await fs.readFile(path.resolve(__dirname, 'expected/renderPreview/renderPreview-expected.html'), 'utf8');
+      assert.equal(result, expected);
+    });
   });
 });
