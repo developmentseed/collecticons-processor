@@ -2,14 +2,17 @@ const fs = require('fs-extra');
 const path = require('path');
 
 /**
- * Alias of console.log
+ * Simple logger with levels.
+ * 1 - fatal
+ * 2 - error
+ * 3 - warn
+ * 4 - info
+ * 5 - debug
+ *
+ * Logger level set globally with setLevel().
+ * Logging done using logger.<level>().
  */
 function Logger () {
-  // 1 - fatal
-  // 2 - error
-  // 3 - warn
-  // 4 - info
-  // 5 - debug
   const levels = [
     'fatal', // 1
     'error', // 2
@@ -18,14 +21,6 @@ function Logger () {
     'debug' // 5
   ];
   let verbosity = 3;
-
-  // const logCreator = (neededLevel) => {
-  //   console.log('level, neededLevel', outputLevel, neededLevel);
-  //   return (...params) => {
-  //     console.log('level', outputLevel);
-  //     if (neededLevel < outputLevel) console.log(...params); // eslint-disable-line
-  //   };
-  // };
 
   levels.forEach((level, idx) => {
     this[level] = (...params) => {
@@ -121,6 +116,17 @@ async function validateDirPath (dirPath) {
   }
 }
 
+/**
+ * Same functionality as validateDirPath but with error messages directed at a
+ * CLI tool.
+ * Validates that the given path is a directory, throwing user erros
+ * in other cases.
+ *
+ * @param {string} dirPath Path to validate
+ *
+ * @see validateDirPath()
+ * @throws Error if validation fails
+ */
 async function validateDirPathForCLI (dirPath) {
   try {
     await validateDirPath(dirPath);
@@ -145,10 +151,39 @@ async function validateDirPathForCLI (dirPath) {
   }
 }
 
+/**
+ * Formats the date to a human readable format like:
+ * January 1st, 1970
+ *
+ * @param {Date} date The object date to format
+ */
+function formatHumanDate (date) {
+  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const y = date.getFullYear();
+  const m = date.getMonth();
+  const d = date.getDate().toString();
+
+  let ordinal;
+  if (d.endsWith('11') || d.endsWith('12') || d.endsWith('13')) {
+    ordinal = 'th';
+  } else if (d.endsWith('1')) {
+    ordinal = 'st';
+  } else if (d.endsWith('2')) {
+    ordinal = 'nd';
+  } else if (d.endsWith('3')) {
+    ordinal = 'rd';
+  } else {
+    ordinal = 'th';
+  }
+
+  return `${months[m]} ${d}${ordinal}, ${y}`;
+}
+
 module.exports = {
   logger: new Logger(),
   userError,
   time,
   validateDirPath,
-  validateDirPathForCLI
+  validateDirPathForCLI,
+  formatHumanDate
 };

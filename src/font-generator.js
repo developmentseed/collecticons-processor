@@ -21,7 +21,7 @@ const generators = {
           .on('data', data => {
             font = Buffer.concat([font, data]);
           })
-          .on('end', () => resolve(font.toString()))
+          .on('end', () => resolve(font))
           .on('error', reject);
 
         options.icons.forEach(({ file, name, codepoint }) => {
@@ -56,7 +56,7 @@ const generators = {
         ts: process.env.NODE_ENV === 'test' ? 0 : undefined,
         ..._.get(options, 'formatOptions.ttf')
       };
-      const font = svg2ttf(svgFont, opts);
+      const font = svg2ttf(svgFont.toString(), opts);
       return Buffer.from(font.buffer);
     }
   },
@@ -80,6 +80,19 @@ const generators = {
   }
 };
 
+/**
+ * Generated the svg, ttf, woff, and woff2 fonts.
+ *
+ * @param {object} options Configuration
+ * @param {string} options.fontName Name of the font.
+ * @param {array} options.icons List of icons. Each should have a `name` and
+ *                `codepoint` properties.boolean
+ * @param {object} options.formatOptions Configuration for each of the font
+ *                 generation plugins
+ *
+ * @returns {object} Object keyed with the font type and respective content.
+ *                   All fonts are returned in Buffer format.
+ */
 async function generateFonts (options = {}) {
   if (!options.fontName) throw new TypeError('Missing fontName argument');
   if (!options.icons || !_.isArray(options.icons) || !options.icons.length) { throw new TypeError('Invalid or empty icons argument'); }

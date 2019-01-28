@@ -41,7 +41,7 @@ program
   .option('--font-name <name>', 'name of the font', 'collecticons')
   .option('--font-types <val>', 'font types to output (woff,woff2)', list, ['woff2'])
 
-  .option('--use-font-files <val>', 'outputs font files to given destination instead of embedding')
+  .option('--font-dest <val>', 'outputs font files to given destination. Output disabled by default. Using this disabled font embed')
 
   .option('--author-name <val>', 'name of the author')
   .option('--author-url <val>', 'url of the author')

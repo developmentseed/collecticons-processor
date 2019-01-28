@@ -89,14 +89,14 @@ describe('Renderers', function () {
       assert.fail('Error not thrown');
     });
 
-    it('Should render the sass file with base render settings', async function () {
+    it('Render the sass file with base render settings', async function () {
       const result = await renderSass(renderSassBase);
 
       const expected = await fs.readFile(path.resolve(__dirname, 'expected/renderSass/renderSass-embed-sass-css.scss'), 'utf8');
       assert.equal(result, expected);
     });
 
-    it('Should render the sass file without embedding the font', async function () {
+    it('Render the sass file without embedding the font', async function () {
       const result = await renderSass({
         ...renderSassBase,
         embed: false
@@ -106,7 +106,7 @@ describe('Renderers', function () {
       assert.equal(result, expected);
     });
 
-    it('Should render the sass file only with placeholders', async function () {
+    it('Render the sass file only with placeholders', async function () {
       const result = await renderSass({
         ...renderSassBase,
         cssClass: false
@@ -116,7 +116,7 @@ describe('Renderers', function () {
       assert.equal(result, expected);
     });
 
-    it('Should render the sass file only with css classes', async function () {
+    it('Render the sass file only with css classes', async function () {
       const result = await renderSass({
         ...renderSassBase,
         sassPlaceholder: false
@@ -126,7 +126,7 @@ describe('Renderers', function () {
       assert.equal(result, expected);
     });
 
-    it('Should render the sass file with only woff2 font', async function () {
+    it('Render the sass file with only woff2 font', async function () {
       const result = await renderSass({
         ...renderSassBase,
         fonts: {
@@ -153,14 +153,14 @@ describe('Renderers', function () {
       assert.fail('Error not thrown');
     });
 
-    it('Should render the css file with base render settings', async function () {
+    it('Render the css file with base render settings', async function () {
       const result = await renderCss(renderCssBase);
 
       const expected = await fs.readFile(path.resolve(__dirname, 'expected/renderCss/renderCss-embed.css'), 'utf8');
       assert.equal(result, expected);
     });
 
-    it('Should render the css file without embedding the font', async function () {
+    it('Render the css file without embedding the font', async function () {
       const result = await renderCss({
         ...renderCssBase,
         embed: false
@@ -170,7 +170,7 @@ describe('Renderers', function () {
       assert.equal(result, expected);
     });
 
-    it('Should render the css file with only woff2 font', async function () {
+    it('Render the css file with only woff2 font', async function () {
       const result = await renderCss({
         ...renderCssBase,
         fonts: {
@@ -197,7 +197,7 @@ describe('Renderers', function () {
       assert.fail('Error not thrown');
     });
 
-    it('Should render catalog as json', async function () {
+    it('Render catalog as json', async function () {
       const result = await renderCatalog({
         fontName: 'collecticons',
         className: 'collecticons',
@@ -243,15 +243,14 @@ describe('Renderers', function () {
       assert.fail('Error not thrown');
     });
 
-    it('Should render the html preview', async function () {
+    it('Render the html preview', async function () {
       const result = await renderPreview({
         fontName: 'collecticons',
 
-        fonts: {
-          woff2: {
-            contents: Buffer.from('woff2 font'),
-            path: 'fonts/collecticons.woff2'
-          }
+        font: {
+          // Preview is always embedded and always woff2.
+          contents: Buffer.from('woff2 font')
+          // There's no need for path.
         },
 
         className: 'collecticons',

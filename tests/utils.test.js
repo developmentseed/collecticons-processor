@@ -1,7 +1,7 @@
 const { assert } = require('chai');
 const path = require('path');
 
-const { validateDirPath, validateDirPathForCLI } = require('../src/utils');
+const { validateDirPath, validateDirPathForCLI, formatHumanDate } = require('../src/utils');
 
 describe('Utils functions', function () {
   describe('validateDirPath', function () {
@@ -92,6 +92,21 @@ describe('Utils functions', function () {
       } catch (error) {
         assert.fail(error);
       }
+    });
+  });
+
+  describe('formatHumanDate', function () {
+    it('Return formatted date', async function () {
+      assert.equal(formatHumanDate(new Date('1970/01/01')), 'January 1st, 1970');
+      assert.equal(formatHumanDate(new Date('1970/01/02')), 'January 2nd, 1970');
+      assert.equal(formatHumanDate(new Date('1970/01/03')), 'January 3rd, 1970');
+      assert.equal(formatHumanDate(new Date('1970/01/11')), 'January 11th, 1970');
+      assert.equal(formatHumanDate(new Date('1970/01/12')), 'January 12th, 1970');
+      assert.equal(formatHumanDate(new Date('1970/01/13')), 'January 13th, 1970');
+      assert.equal(formatHumanDate(new Date('1970/01/20')), 'January 20th, 1970');
+      assert.equal(formatHumanDate(new Date('1970/01/21')), 'January 21st, 1970');
+      assert.equal(formatHumanDate(new Date('1970/01/22')), 'January 22nd, 1970');
+      assert.equal(formatHumanDate(new Date('1970/01/23')), 'January 23rd, 1970');
     });
   });
 });
