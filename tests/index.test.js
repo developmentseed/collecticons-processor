@@ -7,4 +7,5 @@ describe('Collecticons', function () {
   require('./font-generator.test');
   require('./renderers.test');
   require('./compile-prog.test');
+  require('./bundle-prog.test.js');
 });

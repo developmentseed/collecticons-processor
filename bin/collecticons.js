@@ -4,7 +4,7 @@ const program = require('commander');
 const pkg = require('../package.json');
 const { logger } = require('../src/utils');
 
-// const commanderCompile = require('../src/programs/compile');
+const { compileProgram, bundleProgram } = require('./programs');
 
 const list = val => val.split(',');
 
@@ -58,18 +58,12 @@ program
   .option('--no-preview', 'disable the preview')
 
   .option('--catalog-dest <dest>', 'destination folder for the catalog. Output disable by default')
-  .action(actionHandler(commanderCompile));
+  .action(actionHandler(compileProgram));
 
-// program
-//   .command('grid <source-folder> <destination-folder>')
-//   .description('Alter the icons grid')
-//   .option('-r, --remove', 'remove grid from icons')
-//   .action(collecticons.grid);
-
-// program
-//   .command('bundle <source-folder> <destination-file>')
-//   .description('Compile the font outputting a zip file.')
-//   .action(collecticons.bundle);
+program
+  .command('bundle <source-folder> <destination-file>')
+  .description('Compile the font outputting a zip file. Contains all the used icons, the fonts, stylesheet and preview.')
+  .action(actionHandler(bundleProgram));
 
 // Go!
 program.parse(process.argv);

@@ -10,7 +10,16 @@
       "name": "Launch compile",
       "program": "${workspaceFolder}/src/core/compile.js",
       "env": {
-        "NODE_ENV": "debug"
+        "NODE_ENV": "debug-compile"
+      }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch bundle",
+      "program": "${workspaceFolder}/src/core/bundle.js",
+      "env": {
+        "NODE_ENV": "debug-bundle"
       }
     }
   ]

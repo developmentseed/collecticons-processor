@@ -1,6 +1,6 @@
 const fs = require('fs-extra');
 const path = require('path');
-const _ = require('lodash');
+const defaultsDeep = require('lodash.defaultsdeep');
 
 const {
   logger,
@@ -32,7 +32,7 @@ const defaults = {
   sassPlaceholder: true,
   cssClass: true,
 
-  previewDest: 'collecticons/styles/',
+  previewDest: 'collecticons/',
   preview: true
 
   // catalogDest: undefined by default.
@@ -48,6 +48,7 @@ const validStyleFormats = ['css', 'sass'];
  * files.
  *
  * @param {objec} params
+ * @param {string} params.dirPath Source path for the svg icons.
  * @param {string} params.fontName Font name. Default: 'collecticons'
  * @param {array} params.fontTypes List of fonts to create. Only `woff` and
  *                `woff2` are supported. Default to ['woff2']
@@ -71,7 +72,7 @@ const validStyleFormats = ['css', 'sass'];
  * @param {boolean} params.cssClass Whether or not to render css classes.
  *                 Default true
  * @param {string} params.previewDest Output destination for the preview file.
- *                 Default 'collecticons/styles/'
+ *                 Default 'collecticons/'
  * @param {boolean} params.preview Whether or not to render the preview file.
  *                 Default true
  * @param {string} params.catalogDest If defined has to be a valid folder path
@@ -98,7 +99,7 @@ async function collecticonsCompile (params) {
     preview,
     catalogDest,
     noFileOutput
-  } = _.defaultsDeep({}, params, defaults);
+  } = defaultsDeep({}, params, defaults);
 
   await validateDirPath(dirPath);
 
@@ -125,7 +126,7 @@ async function collecticonsCompile (params) {
 
   if (!svgsFiles.length) {
     logger.warn('No icons found in', dirPath);
-    return;
+    return null;
   }
 
   // Unicode Private Use Area start.
@@ -168,11 +169,11 @@ async function collecticonsCompile (params) {
     fonts: {
       woff: {
         contents: fonts.woff,
-        path: path.join(fontDest || '', `${fontName}.woff`)
+        path: path.relative(styleDest, path.join(fontDest || '', `${fontName}.woff`))
       },
       woff2: {
         contents: fonts.woff2,
-        path: path.join(fontDest || '', `${fontName}.woff2`)
+        path: path.relative(styleDest, path.join(fontDest || '', `${fontName}.woff2`))
       }
     },
     authorName,
@@ -238,7 +239,7 @@ async function collecticonsCompile (params) {
 
 module.exports = collecticonsCompile;
 
-if (process.env.NODE_ENV === 'debug') {
+if (process.env.NODE_ENV === 'debug-compile') {
   // Start for debugger.
   collecticonsCompile({
     dirPath: path.resolve(__dirname, '../../tests/fixtures/icons')
