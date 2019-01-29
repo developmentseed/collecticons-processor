@@ -24,7 +24,7 @@ $ collecticons
 
   Commands:
     compile [options] <source-folder>          Compile the font from svg icons
-    bundle <source-folder> <destination-file>  Compile the font outputting a zip file. Contains all the used icons, the fonts, stylesheet and preview.
+    bundle <source-folder> <destination-file>  Compile the font outputting a zip file. Contains all the used icons, stylesheet and preview.
 ```
 
 ### Compile
@@ -85,7 +85,7 @@ The `--font-types` flag allows you to limit the output formats to particular typ
 $ collecticons compile source/ --font-types woff2,woff
 ```
 
-#### Sass vs Css
+#### SASS vs CSS
 The script can output both `sass` and `css` formats but they have significant differences in the way they are structured.
 By default only the `sass` file is created, but this can be changed with `--style-formats`:
 
@@ -93,10 +93,10 @@ By default only the `sass` file is created, but this can be changed with `--styl
 $ collecticons compile source/ --style-formats sass,css
 ```
 
-#### Sass placeholders vs Css classes
+#### SASS placeholders vs CSS classes
 When outputting the style in `sass` format, the script will by default include both sass placeholders and css classes. The output can be modified with `--no-sass-placeholder` and `--no-css-class`. Important to note that they can't both be disabled, and these flags are not valid for `css` output.
 
-**sass**
+**SASS**
 
 ```scss
 %collecticon,
@@ -128,7 +128,7 @@ Placeholders don't make any assumption to what pseudo selector is used (`before`
 ```
 Using this approach allows the usage of up to two icons per element (one per selector).
 
-**css**
+**CSS**
 
 ```css
 [class^="collecticon-"],
@@ -145,7 +145,7 @@ Using this approach allows the usage of up to two icons per element (one per sel
 You can place Collecticons just about anywhere using the respective CSS class. The icon library is designed to be used with inline elements (we like the `<i>` tag for brevity, but using a `<span>` is more semantically correct).
 
 ```html
-<button><i class="ocollecticon-add"></i> Add</button>
+<button><i class="collecticon-add"></i> Add</button>
 ```
 
 ### Bundle
@@ -154,7 +154,7 @@ Creates a zip file with the fonts, css styles, and the icons. *Used to prepare t
 $ collecticons bundle -h
   Usage: bundle [options] <source-folder> <destination-file>
 
-  Compile the font outputting a zip file. Contains all the used icons, the fonts, stylesheet and preview.
+  Compile the font outputting a zip file. Contains all the used icons, stylesheet and preview.
 
   Options:
     -h, --help  output usage information
@@ -167,7 +167,7 @@ $ collecticons bundle source/ destination.zip
 ------
 
 ## Programmatic API
-Both collecticons programs can be used programmatically.
+Both collecticons functions can be used programmatically.
 ```
 const { compile, bundle } = require('../src');
 ```
@@ -194,7 +194,7 @@ Author name for meta information. Default `Development Seed`
 Author url for meta information. Default `https://developmentseed.org/`
 
 **params.className**  
-Class name for sass and css files. Default `collecticons`
+Class name for SASS and CSS files. Default `collecticons`
 
 **params.styleName**  
 Style file name. `scss` and `css` extensions will be using according to the generated file. Default `icons`
@@ -224,10 +224,10 @@ If defined has to be a valid folder path and catalog will be output. Default `un
 If set to `true` a list of files and their content is returned instead of writing the files to disk. Default `undefined`.
 
 ### bundle(params)
-Compiles the collecticons font and zips it. Contains all the used icons, the fonts, stylesheet and preview.
+Compiles the collecticons font and zips it. Contains all the used icons, stylesheet and preview.
 
 **params.dirPath**  
-Source path for the svg icons.
+Source path for the SVG icons.
 
 **params.destFile**  
 Destination of the zip file.

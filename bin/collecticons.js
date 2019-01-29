@@ -62,7 +62,7 @@ program
 
 program
   .command('bundle <source-folder> <destination-file>')
-  .description('Compile the font outputting a zip file. Contains all the used icons, the fonts, stylesheet and preview.')
+  .description('Compile the font outputting a zip file. Contains all the used icons, stylesheet and preview.')
   .action(actionHandler(bundleProgram));
 
 // Go!
