@@ -83,7 +83,7 @@ jobs:
           name: Deploy to npm
           command: |
             echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-            npm deploy
+            npm publish
 
 workflows:
   version: 2
