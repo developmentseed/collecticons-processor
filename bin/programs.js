@@ -1,8 +1,11 @@
 const pick = require('lodash.pick');
 
 const { validateDirPathForCLI } = require('../src/utils');
-const collecticonsCompile = require('../src/core/compile');
-const collecticonsBundle = require('../src/core/bundle');
+
+const {
+  compile: collecticonsCompile,
+  bundle: collecticonsBundle
+} = require('../src');
 
 /**
  * Collecticons compile wrapped for use in the CLI tool.
