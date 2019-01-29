@@ -16,16 +16,15 @@ The script has 2 commands explained below.
 $ collecticons
   Usage: collecticons [options] [command]
 
+  Options:
+    -v, --verbose                              increase verbosity
+    --quiet                                    disable all output
+    -V, --version                              output the version number
+    -h, --help                                 output usage information
 
   Commands:
-
-    compile [options] <source-folder>                    Compile the font from svg icons
-    bundle <source-folder> <destination-file>            Compile the font outputting a zip file.
-
-  Options:
-
-    -h, --help     output usage information
-    -V, --version  output the version number
+    compile [options] <source-folder>          Compile the font from svg icons
+    bundle <source-folder> <destination-file>  Compile the font outputting a zip file. Contains all the used icons, the fonts, stylesheet and preview.
 ```
 
 ### Compile
@@ -149,12 +148,89 @@ You can place Collecticons just about anywhere using the respective CSS class. T
 <button><i class="ocollecticon-add"></i> Add</button>
 ```
 
-
 ### Bundle
 Creates a zip file with the fonts, css styles, and the icons. *Used to prepare the library for distribution.*
 ```
+$ collecticons bundle -h
+  Usage: bundle [options] <source-folder> <destination-file>
+
+  Compile the font outputting a zip file. Contains all the used icons, the fonts, stylesheet and preview.
+
+  Options:
+    -h, --help  output usage information
+```
+Example:
+```
 $ collecticons bundle source/ destination.zip
 ```
+
+------
+
+## Programmatic API
+Both collecticons programs can be used programmatically.
+```
+const { compile, bundle } = require('../src');
+```
+
+### compile(params)
+Compiles the collecticons font and associated styles, catalog and preview files.
+
+**params.dirPath**  
+Source path for the svg icons.
+
+**params.fontName**  
+Font name. Default: `collecticons`
+
+**params.fontTypes**  
+List of fonts to create. Default to `[woff2]`. Possible values `[woff, woff2]`
+
+**params.fontDest**  
+If defined has to be a valid folder path and fonts will be output instead of embedded. Default `undefined`.
+
+**params.authorName**  
+Author name for meta information. Default `Development Seed`
+
+**params.authorUrl**  
+Author url for meta information. Default `https://developmentseed.org/`
+
+**params.className**  
+Class name for sass and css files. Default `collecticons`
+
+**params.styleName**  
+Style file name. `scss` and `css` extensions will be using according to the generated file. Default `icons`
+
+**params.styleFormats**  
+List of style files to create. Default to `[sass]`. Possible values `[css, sass]`
+
+**params.styleDest**  
+Output destination for the style files. Default `collecticons/styles/`
+
+**params.sassPlaceholder**  
+Whether or not to render sass placeholders. Only valid for sass style. Default `true`
+
+**params.cssClass**  
+Whether or not to render css classes. Default `true`
+
+**params.previewDest**  
+Output destination for the preview file. Default `collecticons/`
+
+**params.preview**  
+Whether or not to render the preview file. Default `true`
+
+**params.catalogDest**  
+If defined has to be a valid folder path and catalog will be output. Default `undefined`.
+
+**params.noFileOutput**  
+If set to `true` a list of files and their content is returned instead of writing the files to disk. Default `undefined`.
+
+### bundle(params)
+Compiles the collecticons font and zips it. Contains all the used icons, the fonts, stylesheet and preview.
+
+**params.dirPath**  
+Source path for the svg icons.
+
+**params.destFile**  
+Destination of the zip file.
 
 ## Testing
 The testing is done using mocha. Use `yarn test` to run the tests.
