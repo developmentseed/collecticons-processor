@@ -173,19 +173,31 @@ async function collecticonsCompile (params) {
     );
   }
 
-  const styleOptions = {
-    fontName,
-    embed: !fontDest,
-    fonts: {
+  let includedFonts = {};
+  if (fontTypes.indexOf('woff') !== -1) {
+    includedFonts = {
+      ...includedFonts,
       woff: {
         contents: fonts.woff,
         path: path.relative(styleDest, path.join(fontDest || '', `${fontName}.woff`))
-      },
+      }
+    };
+  }
+
+  if (fontTypes.indexOf('woff2') !== -1) {
+    includedFonts = {
+      ...includedFonts,
       woff2: {
         contents: fonts.woff2,
         path: path.relative(styleDest, path.join(fontDest || '', `${fontName}.woff2`))
       }
-    },
+    };
+  }
+
+  const styleOptions = {
+    fontName,
+    embed: !fontDest,
+    fonts: includedFonts,
     authorName,
     authorUrl,
     className,

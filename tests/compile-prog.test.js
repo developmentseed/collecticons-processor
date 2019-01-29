@@ -149,6 +149,15 @@ describe('Command: compile', function () {
     assert.isUndefined(catalog);
     assert.isUndefined(woff2);
 
+    const actualPreview = await fs.readFile(path.resolve(dest, 'preview.html'), 'utf8');
+    const actualScss = await fs.readFile(path.resolve(dest, 'icons.scss'), 'utf8');
+
+    const expectedPreview = await fs.readFile(path.resolve(__dirname, 'expected/compile-default/preview.html'), 'utf8');
+    const expectedScss = await fs.readFile(path.resolve(__dirname, 'expected/compile-default/icons.scss'), 'utf8');
+
+    assert.equal(actualPreview, expectedPreview);
+    assert.equal(actualScss, expectedScss);
+
     // Clean up.
     await fs.remove(dest);
   });
