@@ -11,6 +11,9 @@
   "bin": {
     "collecticons": "bin/collecticons.js"
   },
+  "engines": {
+    "node": ">=8"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/developmentseed/collecticons-processor"
