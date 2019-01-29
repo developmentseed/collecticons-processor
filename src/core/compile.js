@@ -118,6 +118,16 @@ async function collecticonsCompile (params) {
     throw userError(['Error: invalid style format value'], 'STYLE_TYPE');
   }
 
+  // Verify cssClass with styleFormats.
+  if (styleFormats.length === 1 && styleFormats[0] === 'css' && !cssClass) {
+    throw userError(['Error: cssClass can not be false when styleFormats is only css'], 'CLASS_CSS_FORMAT');
+  }
+
+  // Warn about ignores cssCalss for css style when there is more than one style
+  if (styleFormats.indexOf('css') !== -1 && !cssClass) {
+    logger.warn('cssClass value "false" will be ignored for "css" output.');
+  }
+
   const dir = await fs.readdir(dirPath);
   const svgsFiles = dir.filter(o => o.endsWith('.svg'));
 

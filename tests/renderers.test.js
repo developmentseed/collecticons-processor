@@ -160,6 +160,16 @@ describe('Renderers', function () {
       assert.equal(result, expected);
     });
 
+    it('Render the css file ignoring cssClass property', async function () {
+      const result = await renderCss({
+        ...renderCssBase,
+        cssClass: false
+      });
+
+      const expected = await fs.readFile(path.resolve(__dirname, 'expected/renderCss/renderCss-embed.css'), 'utf8');
+      assert.equal(result, expected);
+    });
+
     it('Render the css file without embedding the font', async function () {
       const result = await renderCss({
         ...renderCssBase,

@@ -48,6 +48,27 @@ describe('Command: compile', function () {
     assert.fail('Error not thrown');
   });
 
+  it('Throw error when cssClass is false and style formats is only css', async function () {
+    try {
+      await compile({
+        dirPath: __dirname, // not important in this test
+        cssClass: false,
+        styleFormats: ['css']
+      });
+    } catch (error) {
+      const msgs = error.details;
+      assert.isTrue(error.userError);
+      assert.deepEqual(msgs, [
+        'Error: cssClass can not be false when styleFormats is only css'
+      ]);
+      assert.equal(error.code, 'CLASS_CSS_FORMAT');
+      return;
+    }
+
+    // Failsafe.
+    assert.fail('Error not thrown');
+  });
+
   it('Throw error when invalid font type is used', async function () {
     try {
       await compile({

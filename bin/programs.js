@@ -39,6 +39,8 @@ async function compileProgram (dirPath, command) {
       error.details = ['Error: --no-sass-placeholder and --no-css-class are mutually exclusive'];
     } else if (code === 'FONT_TYPE') {
       error.details = ['Error: invalid font type value passed to --font-types'];
+    } else if (code === 'CLASS_CSS_FORMAT') {
+      error.details = ['Error: "--no-css-class" and "--style-formats css" are not compatible'];
     } else if (code === 'STYLE_TYPE') {
       error.details = ['Error: invalid style format value passed to --style-format'];
     }
