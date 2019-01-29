@@ -1,6 +1,6 @@
 [![collecticons-banner](https://cloud.githubusercontent.com/assets/1090606/8695447/fdef92fa-2adc-11e5-8979-b61bd96d24ca.png)](https://collecticons.io)
 
-# Collecticons processor
+# Collecticons processor [![CircleCI](https://circleci.com/gh/developmentseed/collecticons-processor.svg?style=svg)](https://circleci.com/gh/developmentseed/collecticons-processor)
 > Processor script for [collecticons icon library](https://github.com/developmentseed/collecticons-lib).
 
 This utility is meant to be used to generate webfont (woff, woff2) and style files (css, sass) from the [collecticons icon library](https://github.com/developmentseed/collecticons-lib).
