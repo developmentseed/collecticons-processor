@@ -11,7 +11,7 @@ const collecticonsCompile = require('./compile');
  * Compiles the collecticons font and zips it.
  * Contains all the used icons, the fonts, stylesheet and preview.
  *
- * @param {objec} params
+ * @param {object} params
  * @param {string} params.dirPath Source path for the svg icons.
  * @param {string} params.destFile Destination of the zip file.
  */

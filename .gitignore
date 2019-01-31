@@ -2,3 +2,5 @@ node_modules
 .resources
 .DS_Store
 test-run
+collecticons.zip
+collecticons/*

@@ -37,7 +37,7 @@ const defaults = {
 
   // catalogDest: undefined by default.
 
-  // noFileOutput: undefiend by default
+  // noFileOutput: undefined by default
 };
 
 const validFontTypes = ['woff', 'woff2'];

@@ -87,7 +87,7 @@ function time (name) {
 }
 
 /**
- * Validates that the given path is a directory, throwing user erros
+ * Validates that the given path is a directory, throwing user errors
  * in other cases.
  *
  * @param {string} dirPath Path to validate
@@ -119,7 +119,7 @@ async function validateDirPath (dirPath) {
 /**
  * Same functionality as validateDirPath but with error messages directed at a
  * CLI tool.
- * Validates that the given path is a directory, throwing user erros
+ * Validates that the given path is a directory, throwing user errors
  * in other cases.
  *
  * @param {string} dirPath Path to validate
