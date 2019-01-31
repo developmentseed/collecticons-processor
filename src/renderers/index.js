@@ -112,7 +112,7 @@ async function renderCatalog (opts = {}) {
         [name]: opts.fonts[name].contents.toString('base64')
       };
     }, {})
-    : null;
+    : undefined;
 
   return JSON.stringify({
     name: opts.fontName,
