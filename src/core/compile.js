@@ -38,6 +38,10 @@ const defaults = {
   // catalogDest: undefined by default.
 
   // noFileOutput: undefined by default
+
+  // Experimental features
+  // experimentalFontOnCatalog
+  // experimentalDisableStyles
 };
 
 const validFontTypes = ['woff', 'woff2'];
@@ -80,6 +84,15 @@ const validStyleFormats = ['css', 'sass'];
  * @param {boolean} params.noFileOutput If set to true a list of files and their
  *                 content is returned instead of writing the files to disk.
  *                 Default undefined.
+ *
+ * @param {boolean} params.experimentalFontOnCatalog Includes the base64 string
+ *                 of the fonts on the catalog.
+ *                 Experimental feature, may change at anytime.
+ *                 Default undefined.
+ * @param {boolean} params.experimentalDisableStyles Disables the output of the
+ *                 style files.
+ *                 Experimental feature, may change at anytime.
+ *                 Default undefined.
  */
 async function collecticonsCompile (params) {
   const {
@@ -98,8 +111,19 @@ async function collecticonsCompile (params) {
     previewDest,
     preview,
     catalogDest,
-    noFileOutput
+    noFileOutput,
+
+    experimentalFontOnCatalog,
+    experimentalDisableStyles
   } = defaultsDeep({}, params, defaults);
+
+  if (experimentalFontOnCatalog) {
+    logger.warn('experimentalFontOnCatalog is an experimental feature and may not work as expected and/or change at anytime.');
+  }
+
+  if (experimentalDisableStyles) {
+    logger.warn('experimentalDisableStyles is an experimental feature and may not work as expected and/or change at anytime.');
+  }
 
   await validateDirPath(dirPath);
 
@@ -207,7 +231,7 @@ async function collecticonsCompile (params) {
     dateFormatted: process.env.NODE_ENV === 'test' ? 'January 1st, 2019' : formatHumanDate(new Date())
   };
 
-  if (styleFormats.indexOf('sass') !== -1) {
+  if (!experimentalDisableStyles && styleFormats.indexOf('sass') !== -1) {
     logger.debug('Rendering sass file');
     virtualFiles = virtualFiles.concat({
       path: path.join(styleDest, `${styleName}.scss`),
@@ -215,7 +239,7 @@ async function collecticonsCompile (params) {
     });
   }
 
-  if (styleFormats.indexOf('css') !== -1) {
+  if (!experimentalDisableStyles && styleFormats.indexOf('css') !== -1) {
     logger.debug('Rendering css file');
     virtualFiles = virtualFiles.concat({
       path: path.join(styleDest, `${styleName}.css`),
@@ -242,6 +266,7 @@ async function collecticonsCompile (params) {
       path: path.join(catalogDest, 'catalog.json'),
       contents: Buffer.from(await renderCatalog({
         fontName,
+        fonts: experimentalFontOnCatalog ? includedFonts : null,
         className,
         icons
       }))

@@ -92,6 +92,9 @@ async function renderPreview (opts = {}) {
  * @param {object} opts Option for the generation.
  * @param {string} opts.fontName Name of the font to render.
  * @param {string} opts.className Class name / sass placeholder to use.
+ * @param {object} opts.fonts Fonts to include as base64 strings.
+ *                 Each object key is the font type and its value is the
+ *                 encoded string.
  * @param {array} opts.icons List of icons. Each should have a `name` and
  *                `codepoint` properties.boolean
  *
@@ -101,9 +104,20 @@ async function renderCatalog (opts = {}) {
   if (!opts.fontName) throw new ReferenceError('fontName is undefined');
   if (!opts.className) throw new ReferenceError('className is undefined');
   if (!opts.icons || !opts.icons.length) throw new ReferenceError('icons is undefined or empty');
+
+  const fonts = opts.fonts
+    ? Object.keys(opts.fonts).reduce((acc, name) => {
+      return {
+        ...acc,
+        [name]: opts.fonts[name].contents.toString('base64')
+      };
+    }, {})
+    : null;
+
   return JSON.stringify({
     name: opts.fontName,
     className: opts.className,
+    fonts,
     icons: opts.icons.map(i => ({
       icon: `${opts.className}-${i.name}`,
       charCode: `\\${i.codepoint.toString(16).toUpperCase()}`

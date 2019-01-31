@@ -37,21 +37,23 @@ $ collecticons compile --help
 
   Options:
 
-  --font-name <name>     name of the font (default: "collecticons")
-  --font-types <val>     font types to output (woff,woff2) (default: ["woff2"])
-  --font-dest <val>      outputs font files to given destination. Output disabled by default. Using this disables font embed
-  --author-name <val>    name of the author
-  --author-url <val>     url of the author
-  --class-name <name>    class name to use (default: "collecticon")
-  --style-name <name>    name for for the style file (default: "icons")
-  --style-formats <val>  style formats to output (sass,css) (default: ["sass"])
-  --style-dest <val>     destination folder for the style files (default: "collecticons/styles/")
-  --no-sass-placeholder  disable the sass placeholder
-  --no-css-class         disable the css standalone classes
-  --preview-dest <dest>  destination folder for the preview (default: "collecticons/")
-  --no-preview           disable the preview
-  --catalog-dest <dest>  destination folder for the catalog. Output disable by default
-  -h, --help             output usage information
+  --font-name <name>              name of the font (default: "collecticons")
+  --font-types <val>              font types to output (woff,woff2) (default: ["woff2"])
+  --font-dest <val>               outputs font files to given destination. Output disabled by default. Using this disables font embed
+  --author-name <val>             name of the author
+  --author-url <val>              url of the author
+  --class-name <name>             class name to use (default: "collecticon")
+  --style-name <name>             name for for the style file (default: "icons")
+  --style-formats <val>           style formats to output (sass,css) (default: ["sass"])
+  --style-dest <val>              destination folder for the style files (default: "collecticons/styles/")
+  --no-sass-placeholder           disable the sass placeholder
+  --no-css-class                  disable the css standalone classes
+  --preview-dest <dest>           destination folder for the preview (default: "collecticons/")
+  --no-preview                    disable the preview
+  --catalog-dest <dest>           destination folder for the catalog. Output disable by default
+  --experimental-font-on-catalog  includes the base64 string of the fonts on the catalog. Experimental feature, may change at anytime
+  --experimental-disable-styles   disabled the style output. Experimental feature, may change at anytime
+  -h, --help                      output usage information
 
 ```
 By default everything will be output to a `collecticons/` folder. It includes a sass file with an embedded woff2 font and a preview to view the exported icons.
@@ -231,6 +233,14 @@ Source path for the SVG icons.
 
 **params.destFile**  
 Destination of the zip file.
+
+**params.experimentalFontOnCatalog**
+Includes the base64 string of the fonts on the catalog. Default `undefined`.
+Experimental feature, may change at anytime.
+
+**params.experimentalDisableStyles**
+Disables the output of the style files. Default `undefined`.
+Experimental feature, may change at anytime.
 
 ## Testing
 The testing is done using mocha. Use `yarn test` to run the tests.
