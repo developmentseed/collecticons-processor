@@ -27,3 +27,6 @@ Install Node modules:
 ```
 yarn install
 ```
+
+## Testing
+The testing is done using mocha. Use `yarn test` to run the tests.

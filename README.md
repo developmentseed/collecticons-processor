@@ -242,11 +242,9 @@ Experimental feature, may change at anytime.
 Disables the output of the style files. Default `undefined`.
 Experimental feature, may change at anytime.
 
-## Testing
-The testing is done using mocha. Use `yarn test` to run the tests.
-
 ## Contributing
-You are free to contribute to the project. If you find a bug and/or have a nice idea about a feature feel free to open an issue or submit your own solution. We'll be more than happy to hear your suggestions. :)
+You are free to contribute to the project. If you find a bug and/or have a nice idea about a feature feel free to open an issue or submit your own solution. See [DEVELOPMENT.md](DEVELOPMENT.md) for setup instructions.
+We'll be more than happy to hear your suggestions. :)
 
 ## License
 Collecticons is licensed under **The MIT License (MIT)**, see the [LICENSE](LICENSE) file for more details.
