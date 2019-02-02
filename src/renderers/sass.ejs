@@ -1,0 +1,62 @@
+/* ==========================================================================
+   Icon font: <%= fontName %>
+   ========================================================================== */
+
+/**<% if (authorName) { %>
+ * Designed by <%= authorName %><% if (authorUrl) { %>
+ * <%= authorUrl %><% } %>
+ *<% } %>
+ * Generated with collecticons-processor on <%= dateFormatted %>
+ * http://collecticons.io/
+ */
+
+@font-face {
+  font-family: "<%= fontName %>";
+  <%_ if (fonts.woff) { -%>
+    <%_ if (embed) { -%>
+  src: url(data:application/font-woff;charset=utf-8;base64,<%= fonts.woff.contents.toString('base64') %>) format('woff');
+    <%_ } else { -%>
+  src: url('<%= fonts.woff.path %>');
+    <%_ } -%>
+  <%_ } -%>
+  <%_ if (fonts.woff2) { -%>
+    <%_ if (embed) { -%>
+  src: url(data:application/font-woff2;charset=utf-8;base64,<%= fonts.woff2.contents.toString('base64') %>) format('woff2');
+    <%_ } else { -%>
+  src: url('<%= fonts.woff2.path %>');
+    <%_ } -%>
+  <%_ } -%>
+  font-weight: normal;
+  font-style: normal;
+}
+
+%<%= className %>,
+[class^="<%= className %>-"],
+[class*=" <%= className %>-"] {
+  speak: none;
+  font-family: "<%= fontName %>";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+
+  /* Better font rendering */
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+<%_ icons.forEach(icon => { -%>
+  <%_ if (sassPlaceholder) { -%>
+
+%<%= className %>-<%= icon.name %> {
+  @extend %<%= className %>;
+  content: "\<%= icon.codepoint.toString(16).toUpperCase() %>";
+}
+  <%_ } -%>
+  <%_ if (cssClass) { -%>
+
+.<%= className %>-<%= icon.name %>:before {
+  content: "\<%= icon.codepoint.toString(16).toUpperCase() %>";
+}
+  <%_ } -%>
+<%_ }); -%>

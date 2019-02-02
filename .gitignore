@@ -1,6 +1,6 @@
-.resources
 node_modules
-npm-debug.log
-
-# Test
-tests/results
+.resources
+.DS_Store
+test-run
+collecticons.zip
+collecticons/*

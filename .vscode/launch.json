@@ -1,0 +1,26 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch compile",
+      "program": "${workspaceFolder}/src/core/compile.js",
+      "env": {
+        "NODE_ENV": "debug-compile"
+      }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch bundle",
+      "program": "${workspaceFolder}/src/core/bundle.js",
+      "env": {
+        "NODE_ENV": "debug-bundle"
+      }
+    }
+  ]
+}

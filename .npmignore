@@ -1,0 +1,13 @@
+.resources
+node_modules
+npm-debug.log
+
+# Test
+tests/results
+
+.editorconfig
+.eslintrc
+.nvmrc
+DEVELOPMENT.md
+.circleci/config.yml
+.vscode/launch.json
