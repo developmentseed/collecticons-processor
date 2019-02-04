@@ -229,11 +229,11 @@ describe('Renderers', function () {
         icons: [
           {
             icon: 'collecticons-book',
-            charCode: '\\F101'
+            charCode: 'F101'
           },
           {
             icon: 'collecticons-chevron-left',
-            charCode: '\\F102'
+            charCode: 'F102'
           }
         ]
       });
