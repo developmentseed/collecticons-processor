@@ -120,7 +120,7 @@ async function renderCatalog (opts = {}) {
     fonts,
     icons: opts.icons.map(i => ({
       icon: `${opts.className}-${i.name}`,
-      charCode: `\\${i.codepoint.toString(16).toUpperCase()}`
+      charCode: `${i.codepoint.toString(16).toUpperCase()}`
     }))
   });
 }

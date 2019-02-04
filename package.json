@@ -1,6 +1,6 @@
 {
   "name": "collecticons-processor",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Processor script for the collecticon icon library",
   "main": "src/index.js",
   "homepage": "https://github.com/developmentseed/collecticons-processor",
