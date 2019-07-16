@@ -12,7 +12,7 @@ const generators = {
       const svgOptions = {
         fontName: options.fontName,
         fontHeight: 1024,
-
+        ...get(options, 'formatOptions.svg', {}),
         log: function () {}
       };
 

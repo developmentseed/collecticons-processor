@@ -26,6 +26,7 @@ async function compileProgram (dirPath, command) {
     'className',
     'previewDest',
     'preview',
+    'rescale',
     'catalogDest',
 
     'experimentalFontOnCatalog',
