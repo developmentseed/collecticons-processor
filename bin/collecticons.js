@@ -58,6 +58,7 @@ program
   .option('--no-preview', 'disable the preview')
 
   .option('--catalog-dest <dest>', 'destination folder for the catalog. Output disable by default')
+  .option('--rescale', 'normalize icons by scaling them to the height of the highest icon')
 
   .option('--experimental-font-on-catalog', 'includes the base64 string of the fonts on the catalog. Experimental feature, may change at anytime')
   .option('--experimental-disable-styles', 'disabled the style output. Experimental feature, may change at anytime')

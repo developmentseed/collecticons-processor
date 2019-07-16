@@ -30,7 +30,8 @@ async function collecticonsBundle (params) {
     fontDest: './',
     fontTypes: ['woff', 'woff2'],
     previewDest: './',
-    noFileOutput: true
+    noFileOutput: true,
+    rescale: true
   });
 
   if (resultFiles === null) return;

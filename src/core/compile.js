@@ -33,7 +33,8 @@ const defaults = {
   cssClass: true,
 
   previewDest: 'collecticons/',
-  preview: true
+  preview: true,
+  normalize: false
 
   // catalogDest: undefined by default.
 
@@ -79,6 +80,9 @@ const validStyleFormats = ['css', 'sass'];
  *                 Default 'collecticons/'
  * @param {boolean} params.preview Whether or not to render the preview file.
  *                 Default true
+ * @param {boolean} params.rescale Whether or not to normalize icons by scaling
+ *                  them to the height of the highest icon.
+ *                 Default false
  * @param {string} params.catalogDest If defined has to be a valid folder path
  *                 and catalog will be output. Default undefined.
  * @param {boolean} params.noFileOutput If set to true a list of files and their
@@ -110,6 +114,7 @@ async function collecticonsCompile (params) {
     className,
     previewDest,
     preview,
+    rescale,
     catalogDest,
     noFileOutput,
 
@@ -176,7 +181,12 @@ async function collecticonsCompile (params) {
 
   const fonts = await generateFont({
     fontName,
-    icons
+    icons,
+    formatOptions: {
+      svg: {
+        normalize: !!rescale
+      }
+    }
   });
 
   // Store all files to be, so that they can be written to disk.

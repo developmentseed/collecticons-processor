@@ -50,6 +50,7 @@ $ collecticons compile --help
   --no-css-class                  disable the css standalone classes
   --preview-dest <dest>           destination folder for the preview (default: "collecticons/")
   --no-preview                    disable the preview
+  --rescale                       normalize icons by scaling them to the height of the highest icon
   --catalog-dest <dest>           destination folder for the catalog. Output disable by default
   --experimental-font-on-catalog  includes the base64 string of the fonts on the catalog. Experimental feature, may change at anytime
   --experimental-disable-styles   disabled the style output. Experimental feature, may change at anytime
@@ -219,11 +220,22 @@ Output destination for the preview file. Default `collecticons/`
 **params.preview**  
 Whether or not to render the preview file. Default `true`
 
+**params.rescale**  
+Whether or not to normalize icons by scaling them to the height of the highest icon. Default `false`
+
 **params.catalogDest**  
 If defined has to be a valid folder path and catalog will be output. Default `undefined`.
 
 **params.noFileOutput**  
 If set to `true` a list of files and their content is returned instead of writing the files to disk. Default `undefined`.
+
+**params.experimentalFontOnCatalog**
+Includes the base64 string of the fonts on the catalog. Default `undefined`.
+Experimental feature, may change at anytime.
+
+**params.experimentalDisableStyles**
+Disables the output of the style files. Default `undefined`.
+Experimental feature, may change at anytime.
 
 ### bundle(params)
 Compiles the collecticons font and zips it. Contains all the used icons, stylesheet and preview.
@@ -233,14 +245,6 @@ Source path for the SVG icons.
 
 **params.destFile**  
 Destination of the zip file.
-
-**params.experimentalFontOnCatalog**
-Includes the base64 string of the fonts on the catalog. Default `undefined`.
-Experimental feature, may change at anytime.
-
-**params.experimentalDisableStyles**
-Disables the output of the style files. Default `undefined`.
-Experimental feature, may change at anytime.
 
 ## Contributing
 You are free to contribute to the project. If you find a bug and/or have a nice idea about a feature feel free to open an issue or submit your own solution. See [DEVELOPMENT.md](DEVELOPMENT.md) for setup instructions.
